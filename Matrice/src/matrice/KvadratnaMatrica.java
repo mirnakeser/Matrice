@@ -14,8 +14,11 @@ public class KvadratnaMatrica extends Matrica{
         super();
     }
     
-    public KvadratnaMatrica(double[][] elementi){
+    public KvadratnaMatrica(double[][] elementi) throws IllegalArgumentException{
         super(elementi);
+        
+        if(elementi.length != elementi[0].length)
+            throw new IllegalArgumentException();
     }
     
     public KvadratnaMatrica(int br){
