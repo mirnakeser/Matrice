@@ -147,6 +147,7 @@ public class Matrica implements Sucelje{
         return rang;
     }
     
+    @Override
     public ArrayList<Integer> size(){
         ArrayList<Integer> s = new ArrayList<>();
         s.add(brRedaka);
@@ -163,7 +164,8 @@ public class Matrica implements Sucelje{
         int m = this.size().get(0);
         int n = this.size().get(1);
         Matrica zbroj = new Matrica(m, n);
-        ThreadPoolExecutor trd = new ThreadPoolExecutor(4, 4, 100, TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(m));
+        int z = Runtime.getRuntime().availableProcessors();
+        ThreadPoolExecutor trd = new ThreadPoolExecutor(z, z, 100, TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(m));
         
         for( int i = 0; i < m; ++i ){
             trd.execute(new Zbrajanje(this, M, zbroj, i));
@@ -177,13 +179,21 @@ public class Matrica implements Sucelje{
     
     @Override
     public Matrica minus(Matrica M)throws IllegalArgumentException, InterruptedException{
-        if(this.size() != M.size())
+        if(this.size().get(0) != M.size().get(0) || this.size().get(1) != M.size().get(1))
             throw new IllegalArgumentException();
         
-        Matrica razlika = new Matrica(brRedaka, brStupaca);
-        for(int i = 0; i < brRedaka; ++i)
-            for(int j = 0; j < brStupaca; ++j)
-                razlika.matrica[i][j] = matrica[i][j] - M.matrica[i][j];
+        int m = this.size().get(0);
+        int n = this.size().get(1);
+        Matrica razlika = new Matrica(m, n);
+        int z = Runtime.getRuntime().availableProcessors();
+        ThreadPoolExecutor trd = new ThreadPoolExecutor(z, z, 100, TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(m));
+        
+        for( int i = 0; i < m; ++i ){
+            trd.execute(new Oduzimanje(this, M, razlika, i));
+        }
+      
+        trd.shutdown();
+        trd.awaitTermination(1, TimeUnit.MINUTES);
         
         return razlika;
     }
@@ -198,7 +208,8 @@ public class Matrica implements Sucelje{
         int k = M.size().get(1);
         
         Matrica umnozak = new Matrica(m, k);
-        ThreadPoolExecutor trd = new ThreadPoolExecutor(4, 4, 100, TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(m));
+        int z = Runtime.getRuntime().availableProcessors();
+        ThreadPoolExecutor trd = new ThreadPoolExecutor(z, z, 100, TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(m));
         
         for( int i = 0; i < m; ++i ){
             trd.execute(new Mnozenje(this, M, umnozak, i));
@@ -236,6 +247,15 @@ public class Matrica implements Sucelje{
         
         try{
             rez = M1.plus(M2);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        
+        System.out.println(rez.toString());
+        
+        try{
+            rez = M1.minus(M2);
         }
         catch(Exception e){
             e.printStackTrace();
