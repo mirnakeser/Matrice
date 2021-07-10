@@ -156,20 +156,27 @@ public class Matrica implements Sucelje{
     }
     
     @Override
-    public Matrica plus(Matrica M) throws IllegalArgumentException{
-        if(this.size() != M.size())
+    public Matrica plus(Matrica M) throws IllegalArgumentException, InterruptedException{
+        if(this.size().get(0) != M.size().get(0) || this.size().get(1) != M.size().get(1))
             throw new IllegalArgumentException();
         
-        Matrica zbroj = new Matrica(brRedaka, brStupaca);
-        for(int i = 0; i < brRedaka; ++i)
-            for(int j = 0; j < brStupaca; ++j)
-                zbroj.matrica[i][j] = matrica[i][j] + M.matrica[i][j];
+        int m = this.size().get(0);
+        int n = this.size().get(1);
+        Matrica zbroj = new Matrica(m, n);
+        ThreadPoolExecutor trd = new ThreadPoolExecutor(4, 4, 100, TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(m));
+        
+        for( int i = 0; i < m; ++i ){
+            trd.execute(new Zbrajanje(this, M, zbroj, i));
+        }
+      
+        trd.shutdown();
+        trd.awaitTermination(1, TimeUnit.MINUTES);
         
         return zbroj;
     }
     
     @Override
-    public Matrica minus(Matrica M){
+    public Matrica minus(Matrica M)throws IllegalArgumentException, InterruptedException{
         if(this.size() != M.size())
             throw new IllegalArgumentException();
         
@@ -211,8 +218,8 @@ public class Matrica implements Sucelje{
     public static void main(String[] args) {
         // TODO code application logic here
         Matrica M1, M2;
-        M1 = new Matrica(2, 3);
-        M2 = new Matrica(3, 4);
+        M1 = new Matrica(3, 3);
+        M2 = new Matrica(3, 3);
         
         System.out.println(M1.toString());
         System.out.println(M2.toString());
@@ -220,6 +227,15 @@ public class Matrica implements Sucelje{
         Matrica rez = new Matrica(3, 3);
         try{
             rez = M1.puta(M2);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        
+        System.out.println(rez.toString());
+        
+        try{
+            rez = M1.plus(M2);
         }
         catch(Exception e){
             e.printStackTrace();
