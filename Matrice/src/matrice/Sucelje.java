@@ -5,11 +5,14 @@
  */
 package matrice;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Martina
  */
 public interface Sucelje {
+    public ArrayList<Integer> size();
     public int rang();
     public Matrica plus(Matrica M)throws IllegalArgumentException, InterruptedException;
     public Matrica minus(Matrica M)throws IllegalArgumentException, InterruptedException;
