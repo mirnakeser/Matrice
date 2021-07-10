@@ -5,7 +5,11 @@
  */
 package matrice;
 
+import java.util.ArrayList;
 import java.util.Random;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 /**
  *
@@ -13,7 +17,7 @@ import java.util.Random;
  * Klasa Matrica sadrzi varijable brRedaka i brStupaca te dvodimenzijalno polje 
  * matrica tipa double u koje pohranjujemo elemente matrice.
  */
-public class Matrica {
+public class Matrica implements Sucelje{
     int brRedaka, brStupaca;
     double[][] matrica;
     
@@ -91,19 +95,137 @@ public class Matrica {
         return s ;
     }
     
+    private void swap(int redak1, int redak2, int stupac)
+    {
+        for (int i = 0; i < stupac; i++)
+        {
+            double temp = matrica[redak1][i];
+            matrica[redak1][i] = matrica[redak2][i];
+            matrica[redak2][i] = temp;
+        }
+    }
+    
+    @Override
+    public int rang(){
+        //postavimo rang na min{brRedaka, brStupaca}
+        int rang = brStupaca;
+        
+        for (int i = 0; i < rang; ++i){
+            if (matrica[i][i] != 0){
+                for (int j = 0; j < brRedaka; ++j){
+                    if (j != i){
+                        double mult = (double)matrica[j][i] / matrica[i][i];
+                        for (int k = 0; k < rang; k++)
+                            matrica[j][k] -= mult * matrica[i][k];
+                    }
+                }
+            }
+            else
+            {
+                boolean reduce = true;
+     
+                for (int k = i + 1; i < brRedaka; k++)
+                {
+                    if (matrica[k][i] != 0){
+                        swap(i, k, rang);
+                        reduce = false;
+                        break ;
+                    }
+                }
+     
+                if (reduce){
+                    rang--;
+     
+                    // Copy the last column here
+                    for (int k = 0; k < brRedaka; ++k)
+                        matrica[k][i] = matrica[k][rang];
+                }
+                --i;
+            }
+        }
+         
+        return rang;
+    }
+    
+    public ArrayList<Integer> size(){
+        ArrayList<Integer> s = new ArrayList<>();
+        s.add(brRedaka);
+        s.add(brStupaca);
+        
+        return s;
+    }
+    
+    @Override
+    public Matrica plus(Matrica M) throws IllegalArgumentException{
+        if(this.size() != M.size())
+            throw new IllegalArgumentException();
+        
+        Matrica zbroj = new Matrica(brRedaka, brStupaca);
+        for(int i = 0; i < brRedaka; ++i)
+            for(int j = 0; j < brStupaca; ++j)
+                zbroj.matrica[i][j] = matrica[i][j] + M.matrica[i][j];
+        
+        return zbroj;
+    }
+    
+    @Override
+    public Matrica minus(Matrica M){
+        if(this.size() != M.size())
+            throw new IllegalArgumentException();
+        
+        Matrica razlika = new Matrica(brRedaka, brStupaca);
+        for(int i = 0; i < brRedaka; ++i)
+            for(int j = 0; j < brStupaca; ++j)
+                razlika.matrica[i][j] = matrica[i][j] - M.matrica[i][j];
+        
+        return razlika;
+    }
+    
+    @Override
+    public Matrica puta(Matrica M) throws IllegalArgumentException, InterruptedException{
+        if(this.size().get(1) != M.size().get(0))
+            throw new IllegalArgumentException();
+        
+        int m = this.size().get(0);
+        int n = this.size().get(1);
+        int k = M.size().get(1);
+        
+        Matrica umnozak = new Matrica(m, k);
+        ThreadPoolExecutor trd = new ThreadPoolExecutor(4, 4, 100, TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(m));
+        
+        for( int i = 0; i < m; ++i ){
+            trd.execute(new Mnozenje(this, M, umnozak, i));
+        }
+      
+        trd.shutdown();
+        trd.awaitTermination(1, TimeUnit.MINUTES);
+        
+        return umnozak;
+    }
+    
+    
+    
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        double[][] els = new double[2][3];
-        Random r = new Random();
-        for(int i = 0; i < 2; ++i){
-            for(int j = 0; j < 3; ++j)
-                els[i][j] = r.nextDouble();
+        Matrica M1, M2;
+        M1 = new Matrica(2, 3);
+        M2 = new Matrica(3, 4);
+        
+        System.out.println(M1.toString());
+        System.out.println(M2.toString());
+        
+        Matrica rez = new Matrica(3, 3);
+        try{
+            rez = M1.puta(M2);
         }
-        Matrica A = new KvadratnaMatrica(els);
-        System.out.println(A.toString());
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        
+        System.out.println(rez.toString());
     }
     
 }
