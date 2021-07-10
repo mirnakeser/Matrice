@@ -11,7 +11,7 @@ package matrice;
  */
 public interface Sucelje {
     public int rang();
-    public Matrica plus(Matrica M);
-    public Matrica minus(Matrica M);
+    public Matrica plus(Matrica M)throws IllegalArgumentException, InterruptedException;
+    public Matrica minus(Matrica M)throws IllegalArgumentException, InterruptedException;
     public Matrica puta(Matrica M) throws IllegalArgumentException, InterruptedException;
 }
