@@ -76,5 +76,15 @@ public class KvadratnaMatrica extends Matrica{
         
         return R;
     }
+    
+    public boolean jeLiPozitivnoDefinitna(){
+        try{
+            this.faktorizacijaCholeskog();
+            return true;
+        }
+        catch(RuntimeException e){
+            return false;
+        }
+    }
 
 }
