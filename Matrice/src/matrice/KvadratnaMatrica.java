@@ -37,7 +37,7 @@ public class KvadratnaMatrica extends Matrica{
         }
     }
     
-    public boolean provjeriSimetricnost(){
+    public boolean jeLiSimetricna(){
         for(int i = 0; i < this.size().get(0); ++i){
             for(int j = 0; j < this.size().get(0); ++j){
                 if(i > j){
@@ -49,4 +49,32 @@ public class KvadratnaMatrica extends Matrica{
         
         return true;
     }
+    
+    public KvadratnaMatrica faktorizacijaCholeskog(){
+        KvadratnaMatrica R = new NulMatrica(this.size().get(0));
+        double sum = 0.0;
+        
+        for(int j = 0; j < this.size().get(0); ++j){
+            for(int i = 0; i < j; ++i){
+                sum = this.matrica[i][j];
+                for(int k = 0; k < i; ++k){
+                    sum -= R.matrica[k][i] * R.matrica[k][j];
+                }
+                R.matrica[i][j] = sum / R.matrica[i][i];
+            }
+            
+            sum = this.matrica[j][j];
+            for(int k = 0; k < j; ++k){
+                sum -= R.matrica[k][j] * R.matrica[k][j];
+            }
+            
+            if(sum > 0.0)
+                R.matrica[j][j] = Math.sqrt(sum);
+            else
+                throw new RuntimeException("Matrica nije pozitivno definitna!");
+        }
+        
+        return R;
+    }
+
 }
