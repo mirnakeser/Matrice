@@ -124,7 +124,7 @@ public class Matrica implements Sucelje{
             {
                 boolean reduce = true;
      
-                for (int k = i + 1; i < brRedaka; k++)
+                for (int k = i + 1; k < brRedaka; k++)
                 {
                     if (matrica[k][i] != 0){
                         swap(i, k, rang);
@@ -228,10 +228,11 @@ public class Matrica implements Sucelje{
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        KvadratnaMatrica M = new KvadratnaMatrica(3);
-        System.out.println(M.toString());
-        M.transponiraj();
-        System.out.println(M.toString());
+        double[][] m = { { 1, 0,  0 },
+                         { -20, -30,  0 },
+                         { 30, 50, 0 } };
+        Matrica M = new Matrica(m);
+        System.out.println(M.rang());
     }
     
 }
