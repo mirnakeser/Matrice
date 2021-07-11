@@ -36,4 +36,17 @@ public class KvadratnaMatrica extends Matrica{
             }
         }
     }
+    
+    public boolean provjeriSimetricnost(){
+        for(int i = 0; i < this.size().get(0); ++i){
+            for(int j = 0; j < this.size().get(0); ++j){
+                if(i > j){
+                    if(this.matrica[i][j] != this.matrica[j][i])
+                        return false;
+                }
+            }
+        }
+        
+        return true;
+    }
 }
