@@ -25,7 +25,10 @@ public class GrafickoSucelje extends javax.swing.JFrame {
     /**
      * Creates new form GrafickoSucelje
      */
+    
+    
     public GrafickoSucelje() {
+        //matrice se mogu unositi preko txt fielda ili preko datoteka ciji oblik se ovdje zadaje
         FileNameExtensionFilter filter = new FileNameExtensionFilter("TEXT FILES", "txt", "text");
         FileChooser.setFileFilter(filter);
         initComponents();
@@ -40,34 +43,34 @@ public class GrafickoSucelje extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jTextFieldUnosDatoteke = new javax.swing.JTextField();
-        jTextFieldUnosMatrice = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel2 = new javax.swing.JPanel();
         jButtonUcitajDatoteku = new javax.swing.JButton();
+        jTextFieldUnosMatrice = new javax.swing.JTextField();
         jButtonUcitajMatricu = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        jButtonSimetricnost = new javax.swing.JButton();
+        jButtonRegularnost = new javax.swing.JButton();
+        jButtonPozitivnaDefinitnost = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jTextFieldUnosDatoteke = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
         jTextArea1 = new javax.swing.JTextArea();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jButtonUcitajDatoteku1 = new javax.swing.JButton();
+        jTextFieldUnosMatrice1 = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jButtonUcitajDatoteku2 = new javax.swing.JButton();
+        jButtonUcitajMatricu2 = new javax.swing.JButton();
+        jTextFieldUnosMatrice2 = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea2 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jTextFieldUnosDatoteke.setName("jTextFieldUnosDatoteke"); // NOI18N
-        jTextFieldUnosDatoteke.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldUnosDatotekeActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jTextFieldUnosDatoteke, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 60, 70, -1));
-        jPanel1.add(jTextFieldUnosMatrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, 70, -1));
-
-        jLabel1.setText("jLabel1");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
-
-        jLabel2.setText("jLabel2");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
 
         jButtonUcitajDatoteku.setText("Učitaj datoteku");
         jButtonUcitajDatoteku.addActionListener(new java.awt.event.ActionListener() {
@@ -75,7 +78,6 @@ public class GrafickoSucelje extends javax.swing.JFrame {
                 jButtonUcitajDatotekuActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonUcitajDatoteku, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 60, -1, -1));
 
         jButtonUcitajMatricu.setText("Učitaj matricu");
         jButtonUcitajMatricu.addActionListener(new java.awt.event.ActionListener() {
@@ -83,25 +85,216 @@ public class GrafickoSucelje extends javax.swing.JFrame {
                 jButtonUcitajMatricuActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonUcitajMatricu, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 130, -1, -1));
+
+        jButtonSimetricnost.setText("Simetričnost");
+        jButtonSimetricnost.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSimetricnostActionPerformed(evt);
+            }
+        });
+
+        jButtonRegularnost.setText("Regularnost");
+
+        jButtonPozitivnaDefinitnost.setText("Pozitivna definitnost");
+
+        jLabel1.setText("Svojstva matrica");
+
+        jTextFieldUnosDatoteke.setName("jTextFieldUnosDatoteke"); // NOI18N
+        jTextFieldUnosDatoteke.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldUnosDatotekeActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("jLabel2");
 
         jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, 270, 90));
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(306, 306, 306)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButtonUcitajMatricu)
+                            .addComponent(jButtonUcitajDatoteku)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(85, 85, 85)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldUnosMatrice, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addComponent(jButtonSimetricnost)
+                        .addGap(49, 49, 49)
+                        .addComponent(jButtonRegularnost)
+                        .addGap(56, 56, 56)
+                        .addComponent(jButtonPozitivnaDefinitnost))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(131, 131, 131)
+                        .addComponent(jTextFieldUnosDatoteke, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(142, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jTextArea1, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonUcitajDatoteku)
+                .addGap(26, 26, 26)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonUcitajMatricu)
+                    .addComponent(jTextFieldUnosMatrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 148, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonSimetricnost)
+                    .addComponent(jButtonRegularnost)
+                    .addComponent(jButtonPozitivnaDefinitnost))
+                .addGap(28, 28, 28)
+                .addComponent(jTextFieldUnosDatoteke, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(101, 101, 101))
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jTextArea1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+
+        jTabbedPane1.addTab("Svojstva matrica", jPanel2);
+
+        jLabel3.setText("Računanje s matricama");
+
+        jLabel4.setText("Unesi matricu 1:");
+
+        jLabel5.setText("Unesi matricu 2:");
+
+        jButtonUcitajDatoteku1.setText("Učitaj datoteku 1");
+        jButtonUcitajDatoteku1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonUcitajDatoteku1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Učitaj matricu 1");
+
+        jButton3.setText("Zbroj");
+
+        jButton4.setText("Umnožak");
+
+        jButtonUcitajDatoteku2.setText("Učitaj datoteku 2");
+
+        jButtonUcitajMatricu2.setText("Učitaj matricu 2");
+
+        jTextArea2.setColumns(20);
+        jTextArea2.setRows(5);
+        jScrollPane1.setViewportView(jTextArea2);
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(68, 68, 68)
+                        .addComponent(jLabel3))
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addGap(136, 136, 136)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jTextFieldUnosMatrice2)
+                                .addComponent(jTextFieldUnosMatrice1))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jButton2))
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addGap(28, 28, 28)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(jPanel3Layout.createSequentialGroup()
+                                    .addComponent(jLabel4)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButtonUcitajDatoteku1))
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jButtonUcitajMatricu2)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addGap(138, 138, 138)
+                                        .addComponent(jButtonUcitajDatoteku2)))
+                                .addGroup(jPanel3Layout.createSequentialGroup()
+                                    .addComponent(jButton3)
+                                    .addGap(40, 40, 40)
+                                    .addComponent(jButton4))
+                                .addComponent(jScrollPane1)))))
+                .addContainerGap(237, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addComponent(jLabel3)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(jButtonUcitajDatoteku1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextFieldUnosMatrice1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton2))
+                        .addGap(17, 17, 17)
+                        .addComponent(jLabel5))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(105, 105, 105)
+                        .addComponent(jButtonUcitajDatoteku2)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonUcitajMatricu2)
+                    .addComponent(jTextFieldUnosMatrice2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(13, 13, 13)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton3)
+                    .addComponent(jButton4))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(98, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Računanje s matricana", jPanel3);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addComponent(jTabbedPane1)
+                .addGap(5, 5, 5))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(0, 46, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 45, Short.MAX_VALUE))
         );
+
+        jTabbedPane1.getAccessibleContext().setAccessibleName("Svojstva");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -110,11 +303,13 @@ public class GrafickoSucelje extends javax.swing.JFrame {
     //prebacuje dani string u odgovarajuce polje double[][]
     //provjerava je li dani tekst ispravnog formata
     private void raspakirajMatricu(String tekst) {
-        
+        matricaPravilnoUnesena = false;
         //System.out.println("ucitano: " + tekst);
         tekst = tekst.strip();
 
         if (!tekst.endsWith("]") || !tekst.startsWith("[")) {
+            jTextArea1.setText("nepravilno unesena matrica");
+
             System.out.println("nepravilno unesena matrica");
             return;
         }
@@ -122,6 +317,7 @@ public class GrafickoSucelje extends javax.swing.JFrame {
         tekst = tekst.substring(1, tekst.length()-1);
         tekst = tekst.strip();
         if (!tekst.endsWith("]") || !tekst.startsWith("[")) {
+            jTextArea1.setText("nepravilno unesena matrica");
             System.out.println("nepravilno unesena matrica");
             return;
         }
@@ -135,8 +331,13 @@ public class GrafickoSucelje extends javax.swing.JFrame {
         //unesenaMatrica = new double[matrica.length][matrica[0].length()-2];
         //System.out.println("duljina prvog retka: " + matrica[0].length());
         //double unesenaMatrica[][] = new double[matrica[0].length()][matrica.length];
-        int brojStupaca = matrica[1].split(",").length;
+        
+        brojRedaka = matrica.length-1;
+        brojStupaca = matrica[1].split(",").length;
+        
         if(brojStupaca== 0) {
+            jTextArea1.setText("nepravilno unesena matrica");
+            
             System.out.println("nepravilno unesena matrica");
             return;
         }
@@ -153,6 +354,7 @@ public class GrafickoSucelje extends javax.swing.JFrame {
                 if(matrica[i].endsWith(",") && matrica[i].lastIndexOf("]") == matrica[i].length()-2)
                     matrica[i] = matrica[i].substring(0, duljina-2);
                 else {
+                    jTextArea1.setText("nepravilno unesena matrica");
                     System.out.println("nepravilno unesena matrica");
                     return;
                 }
@@ -164,6 +366,8 @@ public class GrafickoSucelje extends javax.swing.JFrame {
             //System.out.println("duljina retka: " + redak.length);
             
             if(redak.length != brojStupaca) {
+                jTextArea1.setText("nepravilno unesena matrica");
+
                 System.out.println("nepravilno unesena matrica");
                 return;
             }
@@ -171,6 +375,8 @@ public class GrafickoSucelje extends javax.swing.JFrame {
             for(int j = 0; j < redak.length; j++) {
                 //System.out.println(Double.parseDouble(redak[j]));
                 if (!redak[j].matches("^(\\d+(\\.\\d+)?)$")) {
+                    jTextArea1.setText("nepravilno unesena matrica");
+
                     System.out.println("nepravilno unesena matrica");
                     return;
                 }
@@ -186,61 +392,133 @@ public class GrafickoSucelje extends javax.swing.JFrame {
             System.out.println();   
         }  
         */
-        jTextArea1.setText("");
-        String tekstTextArea = "";
         
-        for(int i = 0; i < unesenaMatrica.length; i++) {
-            tekstTextArea += "[";
-            for(int j = 0; j < unesenaMatrica[0].length; j++) {
-                tekstTextArea += String.valueOf(unesenaMatrica[i][j]);
+        //postavlja se na true ako je fja primila string s pravilno upisanom matricom
+        matricaPravilnoUnesena = true;
+        
+    }
+    
+    
+    //prima polje u kojem je upisana matrica
+    //vraca string s istom matricu u formatu koji ce se ispisati u text area
+    private String upisMatriceUTextArea(double[][] matrica) {
+        String tekst = "";
+        
+        for(int i = 0; i < matrica.length; i++) {
+            tekst += "[";
+            for(int j = 0; j < matrica[0].length; j++) {
+                tekst += String.valueOf(unesenaMatrica[i][j]);
                 if(j < unesenaMatrica[0].length-1)
-                    tekstTextArea += ", ";
+                    tekst += ", ";
             }
-            tekstTextArea += "]\n";                              
+            tekst += "]\n";                              
+        }       
+        return tekst;
+    }
+    
+    // nakon pritiska buttona za ucitavanje matrice iz datoteke se ovoj fji salje odgovarajuci evt
+    // biramo datoteku koja sadrzi matricu
+    //upisujemo sve iz datoteke u string cijelaDatoteka
+    //fja vraca string sa sadrzajem datoteke
+    String ucitajDatoteku(java.awt.event.ActionEvent evt) {
+        int returnVal = FileChooser.showOpenDialog((Component)evt.getSource());
+        String cijelaDatoteka = "";
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            File file = FileChooser.getSelectedFile();
+            try {
+                imeDatoteke = file.toString();
+            } catch (Exception ex) {
+
+            }
+            //System.out.println(imeDatoteke);
+            String linija = "";
+            File input = new File(imeDatoteke);
+
+            Path p = Paths.get(input.getAbsolutePath());
+            try {
+                BufferedReader citac = Files.newBufferedReader(p, StandardCharsets.UTF_8);
+                while((linija = citac.readLine()) != null) {
+                    cijelaDatoteka += linija;
+                }
+            }
+            catch (Exception ex) {
+            }
         }
-        
-        jTextArea1.setText(tekstTextArea);
+        return cijelaDatoteka;
+
     }
     
     private void jTextFieldUnosDatotekeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldUnosDatotekeActionPerformed
         // TODO add your handling code here:
         
     }//GEN-LAST:event_jTextFieldUnosDatotekeActionPerformed
-// pritiskom buttona se otvara dialog za odabit txt fajla u kojem je zapisana matrica
+    // pozivaju se fje za odabir datoteke s matricom, upis u string, provjeru sadrzaja stringa
+   // ako je sve pravilno odabrano i uneseno, ispisujemo matricu u txt area
     private void jButtonUcitajDatotekuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUcitajDatotekuActionPerformed
         // TODO add your handling code here:
-        int returnVal = FileChooser.showOpenDialog((Component)evt.getSource());
-        if (returnVal == JFileChooser.APPROVE_OPTION) {
-            File file = FileChooser.getSelectedFile();
-            try {
-                imeDatoteke = file.toString();
-            } catch (Exception ex) {
-                
-            }
-            //System.out.println(imeDatoteke);
-            String cijelaDatoteka = "", linija = "";
-            File input = new File(imeDatoteke);
-            
-            Path p = Paths.get(input.getAbsolutePath());
-            try {
-                BufferedReader citac = Files.newBufferedReader(p, StandardCharsets.UTF_8);
-                while((linija = citac.readLine()) != null) {
-                    cijelaDatoteka += linija;
-                raspakirajMatricu(cijelaDatoteka);    
-                }
-            }
-            catch (Exception ex) {
-            }
-                    
-        }
-        
+        String datoteka = ucitajDatoteku(evt);
+        raspakirajMatricu(datoteka);                  
+        if (matricaPravilnoUnesena)
+            jTextArea1.setText(upisMatriceUTextArea(unesenaMatrica));                                                       
     }//GEN-LAST:event_jButtonUcitajDatotekuActionPerformed
 
+    // ako je u text field pravilno upisana matrica, ispisuje ju se u text area i cisti se sadrzaj text fielda
     private void jButtonUcitajMatricuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUcitajMatricuActionPerformed
         // TODO add your handling code here:
         raspakirajMatricu(jTextFieldUnosMatrice.getText());
+        if (matricaPravilnoUnesena)
+            jTextArea1.setText(upisMatriceUTextArea(unesenaMatrica));  
         jTextFieldUnosMatrice.setText("");
     }//GEN-LAST:event_jButtonUcitajMatricuActionPerformed
+
+    // provjera da li je uopce upisana matrica
+    // ako je, provjerava se simetricnost
+    //odg se upisuje u text area ispod matrice
+    private void jButtonSimetricnostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSimetricnostActionPerformed
+        // TODO add your handling code here 
+        
+        if(!matricaPravilnoUnesena)
+            return;
+        String noviTekst = jTextArea1.getText();
+        simetricna = false;
+        if (brojRedaka != brojStupaca)             
+            noviTekst += "\n Matrica nije kvadratna, ne može se provjeriti simetričnost. \n";
+        
+        else {
+            for(int i = 0; i < brojRedaka; i++) 
+                for (int j = 0; j < brojStupaca; j++) 
+                    if (unesenaMatrica[i][j] != unesenaMatrica[j][i])  {
+                        noviTekst += "\n Matrica nije simetrična. \n";
+                        jTextArea1.setText(noviTekst);
+                        return;
+                    }      
+            simetricna = true;
+        }
+        
+        if(simetricna) noviTekst += "\n Matrica je simetrična.\n";
+        jTextArea1.setText(noviTekst);
+
+
+        
+        
+    }//GEN-LAST:event_jButtonSimetricnostActionPerformed
+
+    // unos matrice 1 u tabu za racunanje
+    //----- treba dodati varijable za rad s dvije matrice i dovrsiti fju
+    private void jButtonUcitajDatoteku1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUcitajDatoteku1ActionPerformed
+        // TODO add your handling code here:
+        String datoteka = ucitajDatoteku(evt);
+        raspakirajMatricu(datoteka);                  
+        if (matrica1PravilnoUnesena && !matrica2PravilnoUnesena) {
+            jTextArea2.setText(upisMatriceUTextArea(unesenaMatrica)+"\n"+"Unesite matricu 2");            
+        }
+        else if (!matrica1PravilnoUnesena) {
+            jTextArea2.setText("Matrica 1 unesena u nepravilnom formatu.");
+        }
+        else if (matrica1PravilnoUnesena && matrica2PravilnoUnesena) {
+
+        }
+    }//GEN-LAST:event_jButtonUcitajDatoteku1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -277,18 +555,40 @@ public class GrafickoSucelje extends javax.swing.JFrame {
         });
     }
 
-    private JFileChooser FileChooser = new JFileChooser();
+    private final JFileChooser FileChooser = new JFileChooser();
     String imeDatoteke = "";
     double unesenaMatrica[][];
+    int brojStupaca, brojRedaka;
+    boolean matrica1PravilnoUnesena = false;    boolean matrica2PravilnoUnesena = false;
+    boolean matricaPravilnoUnesena = false;
+    
+    boolean simetricna = false;
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButtonPozitivnaDefinitnost;
+    private javax.swing.JButton jButtonRegularnost;
+    private javax.swing.JButton jButtonSimetricnost;
     private javax.swing.JButton jButtonUcitajDatoteku;
+    private javax.swing.JButton jButtonUcitajDatoteku1;
+    private javax.swing.JButton jButtonUcitajDatoteku2;
     private javax.swing.JButton jButtonUcitajMatricu;
+    private javax.swing.JButton jButtonUcitajMatricu2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea jTextArea2;
     private javax.swing.JTextField jTextFieldUnosDatoteke;
     private javax.swing.JTextField jTextFieldUnosMatrice;
+    private javax.swing.JTextField jTextFieldUnosMatrice1;
+    private javax.swing.JTextField jTextFieldUnosMatrice2;
     // End of variables declaration//GEN-END:variables
 }
