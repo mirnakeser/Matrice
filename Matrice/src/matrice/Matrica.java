@@ -34,7 +34,7 @@ public class Matrica implements Sucelje{
         Random r = new Random();
         for(int i = 0; i < brRedaka; ++i)
             for(int j = 0; j < brStupaca; ++j)
-                matrica[i][j] = r.nextDouble() * (r.nextInt()%100);
+                matrica[i][j] = Math.round((r.nextDouble() * (r.nextInt()%100))*100.0)/100.0;
     }
     
     /**
@@ -68,7 +68,7 @@ public class Matrica implements Sucelje{
         matrica = new double[brRedaka][brStupaca];
         for(int i = 0; i < brRedaka; ++i)
             for(int j = 0; j < brStupaca; ++j)
-                matrica[i][j] = r.nextDouble() * (r.nextInt()%100);
+                matrica[i][j] = Math.round((r.nextDouble() * (r.nextInt()%100))*100.0)/100.0;
     }
     
     /**
@@ -228,40 +228,10 @@ public class Matrica implements Sucelje{
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        Matrica M1, M2;
-        M1 = new Matrica(3, 3);
-        M2 = new Matrica(3, 3);
-        
-        System.out.println(M1.toString());
-        System.out.println(M2.toString());
-        
-        Matrica rez = new Matrica(3, 3);
-        try{
-            rez = M1.puta(M2);
-        }
-        catch(Exception e){
-            e.printStackTrace();
-        }
-        
-        System.out.println(rez.toString());
-        
-        try{
-            rez = M1.plus(M2);
-        }
-        catch(Exception e){
-            e.printStackTrace();
-        }
-        
-        System.out.println(rez.toString());
-        
-        try{
-            rez = M1.minus(M2);
-        }
-        catch(Exception e){
-            e.printStackTrace();
-        }
-        
-        System.out.println(rez.toString());
+        KvadratnaMatrica M = new KvadratnaMatrica(3);
+        System.out.println(M.toString());
+        M.transponiraj();
+        System.out.println(M.toString());
     }
     
 }
