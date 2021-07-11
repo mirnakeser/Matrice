@@ -24,4 +24,16 @@ public class KvadratnaMatrica extends Matrica{
     public KvadratnaMatrica(int br){
         super(br, br);
     }
+    
+    public void transponiraj(){
+        for(int i = 0; i < this.size().get(0); ++i){
+            for(int j = 0; j < this.size().get(0); ++j){
+                if(i > j){
+                    double temp = this.matrica[i][j];
+                    this.matrica[i][j] = this.matrica[j][i];
+                    this.matrica[j][i] = temp;
+                }
+            }
+        }
+    }
 }
