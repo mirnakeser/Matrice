@@ -114,7 +114,7 @@ public class GrafickoSucelje extends javax.swing.JFrame {
 
         jLabel9.setText("Transformacije:");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Transponiranje", "faktorizacija Choleskog", "Swap" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Transponiranje", "Faktorizacija Choleskog", "Swap" }));
 
         jButton1.setText("Izračunaj!");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -124,6 +124,11 @@ public class GrafickoSucelje extends javax.swing.JFrame {
         });
 
         jButton5.setText("Transformiraj!");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -602,11 +607,11 @@ public class GrafickoSucelje extends javax.swing.JFrame {
 
     // IZRACUNAJ BUTTON
     //provjera odabrane opcije
-    //ovisno o odabiru poziva se odg fja koja racuna trazeno svojstvo matrice i daje ispis rezultata
+    //ovisno o odabiru racuna trazeno svojstvo matrice i daje ispis rezultata
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         if(!matricaPravilnoUnesena) {
-            JOptionPane.showMessageDialog(this, "Nema unesene matrice za provjeru regularnosti.", "", JOptionPane.INFORMATION_MESSAGE);            
+            JOptionPane.showMessageDialog(this, "Nije upisana matrica.", "", JOptionPane.INFORMATION_MESSAGE);            
             return;
         }
         String odabrano = jComboBox1.getSelectedItem().toString();
@@ -635,6 +640,45 @@ public class GrafickoSucelje extends javax.swing.JFrame {
         jTextFieldSvojstva.setText(rez);
 
     }//GEN-LAST:event_jButton1ActionPerformed
+    // TRANSFORMIRAJ BUTTON
+    //ponasa se ekvivalentno kao gornja fja za izracunaj
+    // ---treba dovrsiti
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        if(!matricaPravilnoUnesena) {
+            JOptionPane.showMessageDialog(this, "Nije upisana matrica.", "", JOptionPane.INFORMATION_MESSAGE);            
+            
+            return;
+        }
+        
+        String odabrano = jComboBox2.getSelectedItem().toString();
+        jTextFieldSvojstva.setText("");
+        String rez = "";
+        
+        if (odabrano == "Swap") {
+            JOptionPane.showInputDialog(this, "Odaberite retke i stupac za swap:", "1,2,1");
+            //JOptionPane.showInternalInputDialog(this, "upisi redak, redak, stupac", "Odabir redaka i stupca za swap", HEIGHT);
+            //JOptionPane.showMessageDialog(this, "Matrica nije kvadratna, ne može se izračunati traženo svojstvo!", "Upozorenje", JOptionPane.QUESTION_MESSAGE);            
+            
+
+        }
+        else {
+            if (brojRedaka != brojStupaca) {
+                JOptionPane.showMessageDialog(this, "Matrica nije kvadratna, ne može se napraviti tražena transformacija!", "Upozorenje", JOptionPane.WARNING_MESSAGE);            
+                return;
+            }
+            
+            if(odabrano == "Transponiranje") {
+                
+            }
+            else {
+                
+            }
+        }
+        
+        //jTextFieldSvojstva.setText(rez);
+        
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments
