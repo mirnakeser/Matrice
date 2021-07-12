@@ -52,7 +52,7 @@ public class GrafickoSucelje extends javax.swing.JFrame {
         jButtonRegularnost = new javax.swing.JButton();
         jButtonPozitivnaDefinitnost = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jTextFieldUnosDatoteke = new javax.swing.JTextField();
+        jTextFieldSvojstva = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jTextArea1 = new javax.swing.JTextArea();
         jPanel3 = new javax.swing.JPanel();
@@ -69,6 +69,10 @@ public class GrafickoSucelje extends javax.swing.JFrame {
         jTextFieldUnosMatrice2 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea2 = new javax.swing.JTextArea();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -99,10 +103,10 @@ public class GrafickoSucelje extends javax.swing.JFrame {
 
         jLabel1.setText("Svojstva matrica");
 
-        jTextFieldUnosDatoteke.setName("jTextFieldUnosDatoteke"); // NOI18N
-        jTextFieldUnosDatoteke.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldSvojstva.setName("jTextFieldSvojstva"); // NOI18N
+        jTextFieldSvojstva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldUnosDatotekeActionPerformed(evt);
+                jTextFieldSvojstvaActionPerformed(evt);
             }
         });
 
@@ -136,12 +140,12 @@ public class GrafickoSucelje extends javax.swing.JFrame {
                         .addGap(56, 56, 56)
                         .addComponent(jButtonPozitivnaDefinitnost))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(131, 131, 131)
-                        .addComponent(jTextFieldUnosDatoteke, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(26, 26, 26)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(142, Short.MAX_VALUE))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(92, 92, 92)
+                        .addComponent(jTextFieldSvojstva, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(115, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -166,9 +170,9 @@ public class GrafickoSucelje extends javax.swing.JFrame {
                     .addComponent(jButtonSimetricnost)
                     .addComponent(jButtonRegularnost)
                     .addComponent(jButtonPozitivnaDefinitnost))
-                .addGap(28, 28, 28)
-                .addComponent(jTextFieldUnosDatoteke, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(101, 101, 101))
+                .addGap(27, 27, 27)
+                .addComponent(jTextFieldSvojstva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(102, 102, 102))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -192,14 +196,29 @@ public class GrafickoSucelje extends javax.swing.JFrame {
         });
 
         jButton2.setText("Učitaj matricu 1");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Zbroj");
 
         jButton4.setText("Umnožak");
 
         jButtonUcitajDatoteku2.setText("Učitaj datoteku 2");
+        jButtonUcitajDatoteku2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonUcitajDatoteku2ActionPerformed(evt);
+            }
+        });
 
         jButtonUcitajMatricu2.setText("Učitaj matricu 2");
+        jButtonUcitajMatricu2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonUcitajMatricu2ActionPerformed(evt);
+            }
+        });
 
         jTextArea2.setColumns(20);
         jTextArea2.setRows(5);
@@ -277,6 +296,38 @@ public class GrafickoSucelje extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Računanje s matricana", jPanel3);
 
+        jLabel6.setText("Upute za pravilan unos matrica:");
+
+        jLabel7.setText("1. učitavanje iz datoteka moguće isključivo ako su .txt formata");
+
+        jLabel8.setText("2. matrice nužno moraju biti oblika [[a11,a12,...a1n],[a21,a22,...,a2n],...,[am1,am2,...,amn]]");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(59, 59, 59)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel6))
+                .addContainerGap(78, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addComponent(jLabel6)
+                .addGap(29, 29, 29)
+                .addComponent(jLabel7)
+                .addGap(38, 38, 38)
+                .addComponent(jLabel8)
+                .addContainerGap(324, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Upute", jPanel1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -300,16 +351,25 @@ public class GrafickoSucelje extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
    
     // fja koja prima string u kojem je zapisan ili tekst datoteke ili unos iz tekst fielda
+    // prima int opcija koji daje info o tome od kud je ucitana matrica (tab1, tab2 prva ili druga)
     //prebacuje dani string u odgovarajuce polje double[][]
     //provjerava je li dani tekst ispravnog formata
-    private void raspakirajMatricu(String tekst) {
-        matricaPravilnoUnesena = false;
+    private void raspakirajMatricu(String tekst, int opcija) {
+        
+        if(opcija == 0) {
+            matricaPravilnoUnesena = false;
+        }
+        else if (opcija == 1) {
+            matrica1PravilnoUnesena = false;
+        }
+        else if (opcija == 2) {
+            matrica2PravilnoUnesena = false;
+        }
+        
         //System.out.println("ucitano: " + tekst);
         tekst = tekst.strip();
 
         if (!tekst.endsWith("]") || !tekst.startsWith("[")) {
-            jTextArea1.setText("nepravilno unesena matrica");
-
             System.out.println("nepravilno unesena matrica");
             return;
         }
@@ -317,7 +377,6 @@ public class GrafickoSucelje extends javax.swing.JFrame {
         tekst = tekst.substring(1, tekst.length()-1);
         tekst = tekst.strip();
         if (!tekst.endsWith("]") || !tekst.startsWith("[")) {
-            jTextArea1.setText("nepravilno unesena matrica");
             System.out.println("nepravilno unesena matrica");
             return;
         }
@@ -335,9 +394,7 @@ public class GrafickoSucelje extends javax.swing.JFrame {
         brojRedaka = matrica.length-1;
         brojStupaca = matrica[1].split(",").length;
         
-        if(brojStupaca== 0) {
-            jTextArea1.setText("nepravilno unesena matrica");
-            
+        if(brojStupaca== 0) {            
             System.out.println("nepravilno unesena matrica");
             return;
         }
@@ -354,7 +411,6 @@ public class GrafickoSucelje extends javax.swing.JFrame {
                 if(matrica[i].endsWith(",") && matrica[i].lastIndexOf("]") == matrica[i].length()-2)
                     matrica[i] = matrica[i].substring(0, duljina-2);
                 else {
-                    jTextArea1.setText("nepravilno unesena matrica");
                     System.out.println("nepravilno unesena matrica");
                     return;
                 }
@@ -366,8 +422,6 @@ public class GrafickoSucelje extends javax.swing.JFrame {
             //System.out.println("duljina retka: " + redak.length);
             
             if(redak.length != brojStupaca) {
-                jTextArea1.setText("nepravilno unesena matrica");
-
                 System.out.println("nepravilno unesena matrica");
                 return;
             }
@@ -375,8 +429,6 @@ public class GrafickoSucelje extends javax.swing.JFrame {
             for(int j = 0; j < redak.length; j++) {
                 //System.out.println(Double.parseDouble(redak[j]));
                 if (!redak[j].matches("^(\\d+(\\.\\d+)?)$")) {
-                    jTextArea1.setText("nepravilno unesena matrica");
-
                     System.out.println("nepravilno unesena matrica");
                     return;
                 }
@@ -393,8 +445,25 @@ public class GrafickoSucelje extends javax.swing.JFrame {
         }  
         */
         
-        //postavlja se na true ako je fja primila string s pravilno upisanom matricom
-        matricaPravilnoUnesena = true;
+        if(opcija == 0) {
+             //postavlja se na true ako je fja primila string s pravilno upisanom matricom
+            matricaPravilnoUnesena = true;
+            //matricaTab1 = new Matrica(unesenaMatrica);
+        }
+        else if (opcija == 1) {
+             //postavlja se na true ako je fja primila string s pravilno upisanom matricom
+            matrica1PravilnoUnesena = true;
+            //matrica1Tab2 = new Matrica(unesenaMatrica);
+
+        }
+        else if (opcija == 2) {
+             //postavlja se na true ako je fja primila string s pravilno upisanom matricom
+            matrica2PravilnoUnesena = true;
+            //matrica2Tab2 = new Matrica(unesenaMatrica);
+
+        }
+        
+       
         
     }
     
@@ -448,26 +517,33 @@ public class GrafickoSucelje extends javax.swing.JFrame {
 
     }
     
-    private void jTextFieldUnosDatotekeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldUnosDatotekeActionPerformed
+    private void jTextFieldSvojstvaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldSvojstvaActionPerformed
         // TODO add your handling code here:
         
-    }//GEN-LAST:event_jTextFieldUnosDatotekeActionPerformed
+    }//GEN-LAST:event_jTextFieldSvojstvaActionPerformed
     // pozivaju se fje za odabir datoteke s matricom, upis u string, provjeru sadrzaja stringa
-   // ako je sve pravilno odabrano i uneseno, ispisujemo matricu u txt area
+    // ako je sve pravilno odabrano i uneseno, ispisujemo matricu u txt area
+    //tab 1
     private void jButtonUcitajDatotekuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUcitajDatotekuActionPerformed
         // TODO add your handling code here:
         String datoteka = ucitajDatoteku(evt);
-        raspakirajMatricu(datoteka);                  
+        raspakirajMatricu(datoteka, 0);                  
         if (matricaPravilnoUnesena)
-            jTextArea1.setText(upisMatriceUTextArea(unesenaMatrica));                                                       
+            jTextArea1.setText(upisMatriceUTextArea(unesenaMatrica));
+        else
+            jTextArea1.setText("Nepravilno unesena matrica.");
+
     }//GEN-LAST:event_jButtonUcitajDatotekuActionPerformed
 
     // ako je u text field pravilno upisana matrica, ispisuje ju se u text area i cisti se sadrzaj text fielda
+    // tab 1
     private void jButtonUcitajMatricuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUcitajMatricuActionPerformed
         // TODO add your handling code here:
-        raspakirajMatricu(jTextFieldUnosMatrice.getText());
+        raspakirajMatricu(jTextFieldUnosMatrice.getText(), 0);
         if (matricaPravilnoUnesena)
             jTextArea1.setText(upisMatriceUTextArea(unesenaMatrica));  
+        else
+            jTextArea1.setText("Nepravilno unesena matrica.");
         jTextFieldUnosMatrice.setText("");
     }//GEN-LAST:event_jButtonUcitajMatricuActionPerformed
 
@@ -479,36 +555,30 @@ public class GrafickoSucelje extends javax.swing.JFrame {
         
         if(!matricaPravilnoUnesena)
             return;
-        String noviTekst = jTextArea1.getText();
         simetricna = false;
         if (brojRedaka != brojStupaca)             
-            noviTekst += "\n Matrica nije kvadratna, ne može se provjeriti simetričnost. \n";
-        
+            jTextFieldSvojstva.setText("\n Matrica nije kvadratna, ne može se provjeriti simetričnost. \n");        
         else {
             for(int i = 0; i < brojRedaka; i++) 
                 for (int j = 0; j < brojStupaca; j++) 
                     if (unesenaMatrica[i][j] != unesenaMatrica[j][i])  {
-                        noviTekst += "\n Matrica nije simetrična. \n";
-                        jTextArea1.setText(noviTekst);
+                        jTextFieldSvojstva.setText("Matrica nije simetrična.");
                         return;
                     }      
             simetricna = true;
         }
         
-        if(simetricna) noviTekst += "\n Matrica je simetrična.\n";
-        jTextArea1.setText(noviTekst);
-
-
-        
+        if(simetricna) 
+            jTextFieldSvojstva.setText("Matrica je simetrična.");
         
     }//GEN-LAST:event_jButtonSimetricnostActionPerformed
 
-    // unos matrice 1 u tabu za racunanje
+    // unos matrice 1 u tabu 2 za racunanje
     //----- treba dodati varijable za rad s dvije matrice i dovrsiti fju
     private void jButtonUcitajDatoteku1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUcitajDatoteku1ActionPerformed
         // TODO add your handling code here:
         String datoteka = ucitajDatoteku(evt);
-        raspakirajMatricu(datoteka);                  
+        raspakirajMatricu(datoteka, 1);                  
         if (matrica1PravilnoUnesena && !matrica2PravilnoUnesena) {
             jTextArea2.setText(upisMatriceUTextArea(unesenaMatrica)+"\n"+"Unesite matricu 2");            
         }
@@ -519,6 +589,24 @@ public class GrafickoSucelje extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_jButtonUcitajDatoteku1ActionPerformed
+    // unos matrice 1 u tabu 2 za racunanje, preko text fielda
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        raspakirajMatricu(jTextFieldUnosMatrice1.getText(), 1);
+        jTextFieldUnosMatrice1.setText("");
+
+    }//GEN-LAST:event_jButton2ActionPerformed
+    // unos matrice 2 u tabu 2 za racunanje
+    private void jButtonUcitajDatoteku2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUcitajDatoteku2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonUcitajDatoteku2ActionPerformed
+    // unos matrice 2 u tabu 2 za racunanje, preko text fielda
+    private void jButtonUcitajMatricu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUcitajMatricu2ActionPerformed
+        // TODO add your handling code here:
+        raspakirajMatricu(jTextFieldUnosMatrice2.getText(), 2);
+        jTextFieldUnosMatrice2.setText("");
+
+    }//GEN-LAST:event_jButtonUcitajMatricu2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -553,16 +641,20 @@ public class GrafickoSucelje extends javax.swing.JFrame {
                 new GrafickoSucelje().setVisible(true);
             }
         });
+        
+        
     }
 
     private final JFileChooser FileChooser = new JFileChooser();
     String imeDatoteke = "";
     double unesenaMatrica[][];
     int brojStupaca, brojRedaka;
-    boolean matrica1PravilnoUnesena = false;    boolean matrica2PravilnoUnesena = false;
+    boolean matrica1PravilnoUnesena = false, matrica2PravilnoUnesena = false;
     boolean matricaPravilnoUnesena = false;
     
     boolean simetricna = false;
+    
+    // Matrica matricaTab1, matrica1Tab2, matrica2Tab2;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -580,13 +672,17 @@ public class GrafickoSucelje extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
-    private javax.swing.JTextField jTextFieldUnosDatoteke;
+    private javax.swing.JTextField jTextFieldSvojstva;
     private javax.swing.JTextField jTextFieldUnosMatrice;
     private javax.swing.JTextField jTextFieldUnosMatrice1;
     private javax.swing.JTextField jTextFieldUnosMatrice2;
