@@ -14,6 +14,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.regex.Pattern;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -98,8 +99,18 @@ public class GrafickoSucelje extends javax.swing.JFrame {
         });
 
         jButtonRegularnost.setText("Regularnost");
+        jButtonRegularnost.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRegularnostActionPerformed(evt);
+            }
+        });
 
         jButtonPozitivnaDefinitnost.setText("Pozitivna definitnost");
+        jButtonPozitivnaDefinitnost.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonPozitivnaDefinitnostActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Svojstva matrica");
 
@@ -511,6 +522,8 @@ public class GrafickoSucelje extends javax.swing.JFrame {
                 }
             }
             catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Neuspješno čitanje datoteke!", "Upozorenje", JOptionPane.WARNING_MESSAGE);
+
             }
         }
         return cijelaDatoteka;
@@ -527,11 +540,13 @@ public class GrafickoSucelje extends javax.swing.JFrame {
     private void jButtonUcitajDatotekuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUcitajDatotekuActionPerformed
         // TODO add your handling code here:
         String datoteka = ucitajDatoteku(evt);
+        jTextArea1.setText("");
+        jTextFieldSvojstva.setText("");
         raspakirajMatricu(datoteka, 0);                  
         if (matricaPravilnoUnesena)
             jTextArea1.setText(upisMatriceUTextArea(unesenaMatrica));
         else
-            jTextArea1.setText("Nepravilno unesena matrica.");
+            JOptionPane.showMessageDialog(this, "Nepravilno unesena matrica!", "Greška", JOptionPane.ERROR_MESSAGE);
 
     }//GEN-LAST:event_jButtonUcitajDatotekuActionPerformed
 
@@ -539,12 +554,17 @@ public class GrafickoSucelje extends javax.swing.JFrame {
     // tab 1
     private void jButtonUcitajMatricuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUcitajMatricuActionPerformed
         // TODO add your handling code here:
+        jTextArea1.setText("");
+        jTextFieldSvojstva.setText("");
+
         raspakirajMatricu(jTextFieldUnosMatrice.getText(), 0);
-        if (matricaPravilnoUnesena)
+        if (matricaPravilnoUnesena) {
             jTextArea1.setText(upisMatriceUTextArea(unesenaMatrica));  
+            jTextFieldUnosMatrice.setText("");
+        }
         else
-            jTextArea1.setText("Nepravilno unesena matrica.");
-        jTextFieldUnosMatrice.setText("");
+            JOptionPane.showMessageDialog(this, "Nepravilno unesena matrica!", "Greška", JOptionPane.ERROR_MESSAGE);
+
     }//GEN-LAST:event_jButtonUcitajMatricuActionPerformed
 
     // provjera da li je uopce upisana matrica
@@ -552,19 +572,34 @@ public class GrafickoSucelje extends javax.swing.JFrame {
     //odg se upisuje u text area ispod matrice
     private void jButtonSimetricnostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSimetricnostActionPerformed
         // TODO add your handling code here 
-        
-        if(!matricaPravilnoUnesena)
+        boolean simetricna = false;
+
+        if(!matricaPravilnoUnesena) {
+            JOptionPane.showMessageDialog(this, "Nema unesene matrice za provjeru simetričnosti.", "", JOptionPane.INFORMATION_MESSAGE);            
             return;
+
+        }
+        jTextFieldSvojstva.setText("");
         simetricna = false;
-        if (brojRedaka != brojStupaca)             
-            jTextFieldSvojstva.setText("\n Matrica nije kvadratna, ne može se provjeriti simetričnost. \n");        
+        
+        if (brojRedaka != brojStupaca) {
+            JOptionPane.showMessageDialog(this, "Matrica nije kvadratna, ne može se provjeriti simetričnost!", "Upozorenje", JOptionPane.WARNING_MESSAGE);            
+        }      
         else {
             for(int i = 0; i < brojRedaka; i++) 
                 for (int j = 0; j < brojStupaca; j++) 
                     if (unesenaMatrica[i][j] != unesenaMatrica[j][i])  {
                         jTextFieldSvojstva.setText("Matrica nije simetrična.");
                         return;
-                    }      
+                    }     
+            
+            
+            /* if (matricaTab1.jeLiSimetricna)
+                    jTextFieldSvojstva.setText("Matrica je simetrična.");
+                else
+                    jTextFieldSvojstva.setText("Matrica nije simetrična.");
+
+            */
             simetricna = true;
         }
         
@@ -607,6 +642,56 @@ public class GrafickoSucelje extends javax.swing.JFrame {
         jTextFieldUnosMatrice2.setText("");
 
     }//GEN-LAST:event_jButtonUcitajMatricu2ActionPerformed
+
+    private void jButtonRegularnostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegularnostActionPerformed
+        // TODO add your handling code here:
+        /*
+        boolean reg = false;
+        if(!matricaPravilnoUnesena) {
+            JOptionPane.showMessageDialog(this, "Nema unesene matrice za provjeru regularnosti.", "", JOptionPane.INFORMATION_MESSAGE);            
+            return;
+
+        }
+        jTextFieldSvojstva.setText("");
+        
+        if (brojRedaka != brojStupaca) {
+            JOptionPane.showMessageDialog(this, "Matrica nije kvadratna, ne može se provjeriti regularnost!", "Upozorenje", JOptionPane.WARNING_MESSAGE);            
+        }      
+        else {
+            
+            
+        }
+        
+        if(reg) 
+            jTextFieldSvojstva.setText("Matrica je regularna.");
+*/  
+    }//GEN-LAST:event_jButtonRegularnostActionPerformed
+
+    private void jButtonPozitivnaDefinitnostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPozitivnaDefinitnostActionPerformed
+        // TODO add your handling code here:
+        if(!matricaPravilnoUnesena) {
+            JOptionPane.showMessageDialog(this, "Nema unesene matrice za provjeru regularnosti.", "", JOptionPane.INFORMATION_MESSAGE);            
+            return;
+
+        }
+        jTextFieldSvojstva.setText("");
+        
+        if (brojRedaka != brojStupaca) {
+            JOptionPane.showMessageDialog(this, "Matrica nije kvadratna, ne može se provjeriti pozitivna definitnost!", "Upozorenje", JOptionPane.WARNING_MESSAGE);            
+        }      
+        else {
+            // if (matricaTab1.jeLiPozitivnoDefinitna) {
+            if(true) {
+                jTextFieldSvojstva.setText("Matrica je pozitivno definitna.");
+            }
+            else {
+                jTextFieldSvojstva.setText("Matrica nije pozitivno definitna.");
+
+            }
+        }
+        
+
+    }//GEN-LAST:event_jButtonPozitivnaDefinitnostActionPerformed
 
     /**
      * @param args the command line arguments
@@ -652,7 +737,6 @@ public class GrafickoSucelje extends javax.swing.JFrame {
     boolean matrica1PravilnoUnesena = false, matrica2PravilnoUnesena = false;
     boolean matricaPravilnoUnesena = false;
     
-    boolean simetricna = false;
     
     // Matrica matricaTab1, matrica1Tab2, matrica2Tab2;
     // Variables declaration - do not modify//GEN-BEGIN:variables

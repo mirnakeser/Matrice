@@ -168,11 +168,17 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Regularnost"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonRegularnostActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jButtonPozitivnaDefinitnost">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Pozitivna definitnost"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonPozitivnaDefinitnostActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel1">
               <Properties>
