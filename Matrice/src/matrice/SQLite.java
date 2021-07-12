@@ -20,12 +20,11 @@ import java.sql.PreparedStatement;
  */
 public class SQLite {
     private String imeBaze = "matrica.db";
-    private String url = " jdbc:sqlite:" + imeBaze ;
+    private String url = "jdbc:sqlite:" + imeBaze ;
 
     // kreira se baza podataka s nazivom matrica u koju ce se pohranjivati pravilno unesene matrice 
     // 1 poziv
     void stvaranjeBaze() {
-
         try ( Connection conn = DriverManager.getConnection ( url ) ) {
             if ( conn != null ) {
                 DatabaseMetaData meta = conn.getMetaData () ;
@@ -109,4 +108,11 @@ public class SQLite {
         }
     }
 
+    public static void main (String args[]) {
+        //SQLite baza = new SQLite();
+        //baza.stvaranjeBaze();
+        //baza.stvaranjeTablice();
+    }
+    
+    
 }
