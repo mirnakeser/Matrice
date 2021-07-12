@@ -29,7 +29,7 @@ public class SQLite {
             if ( conn != null ) {
                 DatabaseMetaData meta = conn.getMetaData () ;
                 System.out.println ("Ime biblioteke za rad s bazom podataka " + meta.getDriverName () ) ;
-                System.out.println (" Stvorena je nova baza .") ;
+                System.out.println (" Stvorena je nova baza.") ;
             }
         } catch ( SQLException e ) {
             System.out.println ( e.getMessage () ) ;
@@ -43,7 +43,7 @@ public class SQLite {
         String sql = " CREATE TABLE IF NOT EXISTS matrice (\n"
                         + " id integer PRIMARY KEY,\n"
                         + " vrijenodnosti text NOT NULL, \n"
-                        + " regularnost integer, \n"
+                        + " rang integer, \n"
                         + " simetricnost integer, \n"
                         + " pozitivnaDefinitnost integer \n"
                         + ");";
@@ -85,7 +85,7 @@ public class SQLite {
         String stupac = "";
         
         if( opcija == 1 )
-            stupac = "regularnost";
+            stupac = "rang";
         else if ( opcija == 2 )
             stupac = "simetricnost";
         else if ( opcija == 3 )
