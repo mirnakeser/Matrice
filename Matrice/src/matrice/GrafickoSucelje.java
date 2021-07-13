@@ -44,6 +44,8 @@ public class GrafickoSucelje extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jEditorPane1 = new javax.swing.JEditorPane();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jButtonUcitajDatoteku = new javax.swing.JButton();
@@ -65,16 +67,18 @@ public class GrafickoSucelje extends javax.swing.JFrame {
         jTextFieldUnosMatrice1 = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
         jButtonUcitajDatoteku2 = new javax.swing.JButton();
         jButtonUcitajMatricu2 = new javax.swing.JButton();
         jTextFieldUnosMatrice2 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea2 = new javax.swing.JTextArea();
+        jComboBox3 = new javax.swing.JComboBox<>();
         jPanel1 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+
+        jScrollPane2.setViewportView(jEditorPane1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -162,7 +166,7 @@ public class GrafickoSucelje extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(76, 76, 76)
                         .addComponent(jTextFieldSvojstva, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(91, Short.MAX_VALUE))
+                .addContainerGap(94, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -212,9 +216,12 @@ public class GrafickoSucelje extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("Zbroj");
-
-        jButton4.setText("Umnožak");
+        jButton3.setText("Izračunaj!");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButtonUcitajDatoteku2.setText("Učitaj datoteku 2");
         jButtonUcitajDatoteku2.addActionListener(new java.awt.event.ActionListener() {
@@ -234,23 +241,24 @@ public class GrafickoSucelje extends javax.swing.JFrame {
         jTextArea2.setRows(5);
         jScrollPane1.setViewportView(jTextArea2);
 
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Zbrajanje", "Oduzimanje", "Množenje" }));
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGap(70, 70, 70)
+                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
+                .addComponent(jButton3)
+                .addGap(280, 280, 280))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(68, 68, 68)
                         .addComponent(jLabel3))
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addGap(136, 136, 136)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jTextFieldUnosMatrice2)
-                                .addComponent(jTextFieldUnosMatrice1))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jButton2))
                         .addGroup(jPanel3Layout.createSequentialGroup()
                             .addGap(28, 28, 28)
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -259,17 +267,20 @@ public class GrafickoSucelje extends javax.swing.JFrame {
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jButtonUcitajDatoteku1))
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jButtonUcitajMatricu2)
                                     .addGroup(jPanel3Layout.createSequentialGroup()
                                         .addComponent(jLabel5)
                                         .addGap(138, 138, 138)
-                                        .addComponent(jButtonUcitajDatoteku2)))
-                                .addGroup(jPanel3Layout.createSequentialGroup()
-                                    .addComponent(jButton3)
-                                    .addGap(40, 40, 40)
-                                    .addComponent(jButton4))
-                                .addComponent(jScrollPane1)))))
-                .addContainerGap(237, Short.MAX_VALUE))
+                                        .addComponent(jButtonUcitajDatoteku2))
+                                    .addComponent(jButtonUcitajMatricu2))
+                                .addComponent(jScrollPane1)))
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addGap(136, 136, 136)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jTextFieldUnosMatrice2)
+                                .addComponent(jTextFieldUnosMatrice1))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jButton2))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -298,7 +309,7 @@ public class GrafickoSucelje extends javax.swing.JFrame {
                 .addGap(13, 13, 13)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
-                    .addComponent(jButton4))
+                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(114, Short.MAX_VALUE))
@@ -322,7 +333,7 @@ public class GrafickoSucelje extends javax.swing.JFrame {
                     .addComponent(jLabel8)
                     .addComponent(jLabel7)
                     .addComponent(jLabel6))
-                .addContainerGap(78, Short.MAX_VALUE))
+                .addContainerGap(81, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -344,7 +355,7 @@ public class GrafickoSucelje extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(5, 5, 5)
-                .addComponent(jTabbedPane1)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 603, Short.MAX_VALUE)
                 .addGap(5, 5, 5))
         );
         layout.setVerticalGroup(
@@ -454,35 +465,23 @@ public class GrafickoSucelje extends javax.swing.JFrame {
             System.out.println();   
         }  
         */
-        boolean kvadratna = false;
-        if(brojRedaka == brojStupaca)
-            kvadratna = true;
         
         if(opcija == 0) {
              //postavlja se na true ako je fja primila string s pravilno upisanom matricom
             matricaPravilnoUnesena = true;
-            if(kvadratna)
-                matricaTab1 = new KvadratnaMatrica(unesenaMatrica);
-            else 
-                matricaTab1 = new Matrica(unesenaMatrica);
+            matricaTab1 = new Matrica(unesenaMatrica);
 
         }
         else if (opcija == 1) {
              //postavlja se na true ako je fja primila string s pravilno upisanom matricom
-            matrica1PravilnoUnesena = true;
-            if(kvadratna)
-                matrica1Tab2 = new KvadratnaMatrica(unesenaMatrica);
-            else 
-                matrica1Tab2 = new Matrica(unesenaMatrica);
+            matrica1PravilnoUnesena = true;           
+            matrica1Tab2 = new Matrica(unesenaMatrica);
 
         }
         else if (opcija == 2) {
              //postavlja se na true ako je fja primila string s pravilno upisanom matricom
             matrica2PravilnoUnesena = true;
-            if(kvadratna)
-                matrica2Tab2 = new KvadratnaMatrica(unesenaMatrica);
-            else 
-                matrica2Tab2 = new Matrica(unesenaMatrica);
+            matrica2Tab2 = new Matrica(unesenaMatrica);
         }
         
        
@@ -492,6 +491,7 @@ public class GrafickoSucelje extends javax.swing.JFrame {
     
     //prima polje u kojem je upisana matrica
     //vraca string s istom matricu u formatu koji ce se ispisati u text area
+    //---nepotrebno, klasa Matrice overridea metodu toString()
     private String upisMatriceUTextArea(double[][] matrica) {
         String tekst = "";
         
@@ -658,20 +658,27 @@ public class GrafickoSucelje extends javax.swing.JFrame {
         String odabrano = jComboBox1.getSelectedItem().toString();
         jTextFieldSvojstva.setText("");
         String rez = "";
+        jComboBox1.setSelectedIndex(0);
         if(odabrano == "Simetričnost" || odabrano == "Pozitivna definitnost") {
             if (matricaTab1.brRedaka != matricaTab1.brStupaca) {
                 JOptionPane.showMessageDialog(this, "Matrica nije kvadratna, ne može se izračunati traženo svojstvo!", "Upozorenje", JOptionPane.WARNING_MESSAGE);            
                 return;
             }
+            /*
+            KvadratnaMatrica km = (KvadratnaMatrica)matricaTab1;
+
             if(odabrano == "Simetričnost") {
-                //if (matricaTab1.jeLiSimetricna()) rez = "Matrica je simetrična.";
-                //else rez = "Matrica nije simetrična.";
+                if (km.jeLiSimetricna()) 
+                    rez = "Matrica je simetrična.";
+                
+                else rez = "Matrica nije simetrična.";
             }
             // poztivna definitnost
             else {
-                // if (matricaTab1.jeLiPozitivnoDefinitna()) rez = "Matrica je pozitivno definitna.";
-                //else rez = "Matrica nije pozitivno definitna.";
+                if (km.jeLiPozitivnoDefinitna()) rez = "Matrica je pozitivno definitna.";
+                else rez = "Matrica nije pozitivno definitna.";
             }
+            */
         }
         
         //rang
@@ -721,6 +728,60 @@ public class GrafickoSucelje extends javax.swing.JFrame {
         //jTextFieldSvojstva.setText(rez);
         
     }//GEN-LAST:event_jButton5ActionPerformed
+    //button za operaciju na matricama 1 i 2, ispisuje se rezultat u text area
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        if(!matrica1PravilnoUnesena) {
+            JOptionPane.showMessageDialog(this, "Unesite matricu 1 u pravilnom formatu!", "Greška", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if(!matrica2PravilnoUnesena) {
+            JOptionPane.showMessageDialog(this, "Unesite matricu 2 u pravilnom formatu!", "Greška", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        Matrica rez;
+        if(jComboBox3.getSelectedItem().toString() == "Množenje") {
+            try {
+                rez = matrica1Tab2.puta(matrica2Tab2);
+                jTextArea2.setText(matrica1Tab2.toString() + "\n*\n" + matrica2Tab2.toString() + "\n=\n" + rez.toString());
+            }catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Matrice nisu odgovarajućih dimenzija!", "Upozorenje", JOptionPane.WARNING_MESSAGE);            
+
+            }
+        }
+        //zbrajanje i oduzimanje
+        else {
+            
+            if(jComboBox3.getSelectedItem().toString() == "Zbrajanje") {
+                try{
+                    rez = matrica1Tab2.plus(matrica2Tab2);
+                    jTextArea2.setText(matrica1Tab2.toString() + "\n+\n" + matrica2Tab2.toString() + "\n=\n" + rez.toString());
+                }
+                catch(Exception e) {
+                    JOptionPane.showMessageDialog(this, "Matrice moraju biti istih dimenzija!", "Upozorenje", JOptionPane.WARNING_MESSAGE);            
+
+                }
+            }
+            // oduzimanje
+            else {
+                try{
+                    rez = matrica1Tab2.minus(matrica2Tab2);
+                    jTextArea2.setText(matrica1Tab2.toString() + "\n-\n" + matrica2Tab2.toString() + "\n=\n" + rez.toString());
+                }
+                catch(Exception e) {
+                    JOptionPane.showMessageDialog(this, "Matrice moraju biti istih dimenzija!", "Upozorenje", JOptionPane.WARNING_MESSAGE);            
+
+
+                }
+            }
+        }
+        
+        
+        
+            
+        
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -771,7 +832,6 @@ public class GrafickoSucelje extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButtonUcitajDatoteku;
     private javax.swing.JButton jButtonUcitajDatoteku1;
@@ -780,6 +840,8 @@ public class GrafickoSucelje extends javax.swing.JFrame {
     private javax.swing.JButton jButtonUcitajMatricu2;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> jComboBox3;
+    private javax.swing.JEditorPane jEditorPane1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -792,6 +854,7 @@ public class GrafickoSucelje extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
