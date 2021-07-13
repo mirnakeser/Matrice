@@ -656,11 +656,31 @@ public class GrafickoSucelje extends javax.swing.JFrame {
         String rez = "";
         
         if (odabrano == "Swap") {
-            JOptionPane.showInputDialog(this, "Odaberite retke i stupac za swap:", "1,2,1");
-            //JOptionPane.showInternalInputDialog(this, "upisi redak, redak, stupac", "Odabir redaka i stupca za swap", HEIGHT);
-            //JOptionPane.showMessageDialog(this, "Matrica nije kvadratna, ne može se izračunati traženo svojstvo!", "Upozorenje", JOptionPane.QUESTION_MESSAGE);            
-            
+            String unosKorisnika = JOptionPane.showInputDialog(this, "Odaberite retke i stupac za swap:", "1,2,1");
+            unosKorisnika.strip();
+            String[] vrijednosti = unosKorisnika.split(",");
+            if(vrijednosti.length != 3) {
+                JOptionPane.showMessageDialog(this, "Potrebno upisati 3 vrijednoti odvojene zarezima.", "Greška", JOptionPane.ERROR_MESSAGE);            
+                return;
+            }
+            int vrijednostiInt[] = new int[3];
+            for(int i = 0; i < 3; i++) {
+                if(!vrijednosti[i].matches("^\\d+$")) {
+                    JOptionPane.showMessageDialog(this, "Potrebno upisati prirodne brojeve.", "Greška", JOptionPane.ERROR_MESSAGE);            
+                    return;
+                }
+                vrijednostiInt[i] = Integer.parseInt(vrijednosti[i]);
 
+                if(i<2 && vrijednostiInt[i] > brojRedaka) {
+                        JOptionPane.showMessageDialog(this, "Upisan prevelik broj, matrica nema toliko redaka.", "Greška", JOptionPane.ERROR_MESSAGE);            
+                        return;
+                }
+                if(i == 2 && vrijednostiInt[i] > brojStupaca) {
+                    JOptionPane.showMessageDialog(this, "Upisan prevelik broj, matrica nema toliko stupaca.", "Greška", JOptionPane.ERROR_MESSAGE);            
+                    return;
+                }
+            }
+       
         }
         else {
             if (brojRedaka != brojStupaca) {
