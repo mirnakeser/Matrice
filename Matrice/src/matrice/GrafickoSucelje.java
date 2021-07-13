@@ -307,8 +307,8 @@ public class GrafickoSucelje extends javax.swing.JFrame {
                     .addComponent(jButtonUcitajMatricu2)
                     .addComponent(jTextFieldUnosMatrice2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(13, 13, 13)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -355,7 +355,7 @@ public class GrafickoSucelje extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(5, 5, 5)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 603, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1)
                 .addGap(5, 5, 5))
         );
         layout.setVerticalGroup(
@@ -665,10 +665,10 @@ public class GrafickoSucelje extends javax.swing.JFrame {
                 return;
             }
             /*
-            KvadratnaMatrica km = (KvadratnaMatrica)matricaTab1;
-
+            KvadratnaMatrica km;
+            
             if(odabrano == "Simetričnost") {
-                if (km.jeLiSimetricna()) 
+                if (matricaTab1.jeLiSimetricna()) 
                     rez = "Matrica je simetrična.";
                 
                 else rez = "Matrica nije simetrična.";
