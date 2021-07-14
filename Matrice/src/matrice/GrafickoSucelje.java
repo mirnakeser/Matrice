@@ -743,6 +743,8 @@ public class GrafickoSucelje extends javax.swing.JFrame {
                     return;
                 }
             }
+            Matrica matswap  = new Matrica (matricaTab1.matrica);
+            matswap.swap(vrijednostiInt[0], vrijednostiInt[1], vrijednostiInt[2]);
        
         }
         else {
@@ -751,11 +753,12 @@ public class GrafickoSucelje extends javax.swing.JFrame {
                 return;
             }
             
+            KvadratnaMatrica km = new KvadratnaMatrica(matricaTab1.matrica);
             if(odabrano == "Transponiranje") {
-                
+                km.transponiraj();
             }
             else {
-                
+                km.faktorizacijaCholeskog();
             }
         }
         
