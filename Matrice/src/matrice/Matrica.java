@@ -95,7 +95,7 @@ public class Matrica implements Sucelje{
         return s ;
     }
     
-    private void swap(int redak1, int redak2, int stupac)
+    public void swap(int redak1, int redak2, int stupac)
     {
         for (int i = 0; i < stupac; i++)
         {
