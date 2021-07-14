@@ -11,6 +11,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 
 
@@ -40,12 +41,19 @@ public class SQLite {
     // 1 poziv
     void stvaranjeTablice() {
         
+        
+        //simetricnost i poz. definitnost:
+        // -1 ako matrica nije kvasdratna
+        // 0 ako matrica nije sim. / poz. def.
+        // 1 ako matrica je sim. / poz.def.
         String sql = " CREATE TABLE IF NOT EXISTS matrice (\n"
-                        + " id integer PRIMARY KEY,\n"
-                        + " vrijenodnosti text NOT NULL, \n"
+                        + " vrijenodnosti text PRIMARY KEY, \n"
                         + " rang integer, \n"
                         + " simetricnost integer, \n"
                         + " pozitivnaDefinitnost integer \n"
+                        + " transponirana text, \n"
+                        + " faktorizacijaCholeskog text, \n"
+                        + " swap text \n"
                         + ");";
         
         try ( Connection conn = DriverManager.getConnection ( url ) ;
@@ -80,7 +88,7 @@ public class SQLite {
     // nakon sto korisnik trazi da se izracuna neko od svostava matrice,
     // u bazi se takoder azurira taj podatak
     // istom fjom se unosi sve, saljemo u fju info o tome koji podatak o matrici smo izracunali
-    public static void azurirajMatricu ( int opcija, int id , int novaVrijednost, Connection conn ) {
+    public static void azurirajSvojstvoMatrice ( int opcija, String vrijednosti , int novaVrijednost, Connection conn ) {
         
         String stupac = "";
         
@@ -96,18 +104,108 @@ public class SQLite {
         }
                     
         String sql = " UPDATE matrica SET " + stupac + " = ? , "
-                        + " WHERE id = ?";
+                        + " WHERE vrijednosti = ?";
 
         try {
             PreparedStatement pstmt = conn.prepareStatement ( sql );
             pstmt.setInt (1 , novaVrijednost ) ;
-            pstmt.setInt (2 , id ) ;
+            pstmt.setString (2 , vrijednosti ) ;
             pstmt.executeUpdate () ;
         } catch ( SQLException e ) {
             System.out.println ( e.getMessage () ) ;
         }
     }
 
+    public static void azurirajTransformacijuMatrice ( int opcija, String vrijednosti , String novaVrijednost, Connection conn ) {
+        
+        String stupac = "";
+        
+        if( opcija == 1 )
+            stupac = "transponirana";
+        else if ( opcija == 2 )
+            stupac = "faktorizacijaCholeskog";
+        else if ( opcija == 3 )
+            stupac = "swap";
+        else {
+            System.out.println("Baza se ne moze azurirati, opcije su vrijednosti 1-3.");
+            return;
+        }
+                    
+        String sql = " UPDATE matrica SET ? = ? WHERE vrijednosti = ?";
+
+        try {
+            PreparedStatement pstmt = conn.prepareStatement ( sql );
+            pstmt.setString (1 , stupac ) ;
+            pstmt.setString (2 , novaVrijednost ) ;
+            pstmt.setString (3 , vrijednosti ) ;
+            pstmt.executeUpdate () ;
+        } catch ( SQLException e ) {
+            System.out.println ( e.getMessage () ) ;
+        }
+    }
+    
+    public static void selectSvojstvo ( Connection conn, String vrijednosti, int opcija ) {
+
+        String stupac = "";
+        
+        if( opcija == 1 )
+            stupac = "rang";
+        else if ( opcija == 2 )
+            stupac = "simetricnost";
+        else if ( opcija == 3 )
+            stupac = "pozitivnaDefinitnost";
+        else {
+            System.out.println("Baza se ne moze azurirati, opcije su vrijednosti 1-3.");
+            return;
+        }
+        
+        String sql = " SELECT ? FROM matrica WHERE vrijednosti = ? ";
+
+        try {
+            PreparedStatement pstmt = conn.prepareStatement ( sql );
+            pstmt.setString (1 , stupac ) ;
+            pstmt.setString (2 , vrijednosti ) ;
+            pstmt.executeUpdate () ;
+            ResultSet rs = pstmt.executeQuery ( sql );
+            while ( rs.next () ) {
+            System.out.println ( rs.getInt (stupac));
+        }
+        } catch ( SQLException e ) {
+            System.out.println ( e.getMessage () ) ;
+        }
+    }
+    
+    public static void selectTransformacija ( Connection conn, String vrijednosti, int opcija ) {
+
+        String stupac = "";
+        
+        if( opcija == 1 )
+            stupac = "transponirana";
+        else if ( opcija == 2 )
+            stupac = "faktorizacijaCholeskog";
+        else if ( opcija == 3 )
+            stupac = "swap";
+        else {
+            System.out.println("Baza se ne moze azurirati, opcije su vrijednosti 1-3.");
+            return;
+        }
+        
+        String sql = " SELECT ? FROM matrica WHERE vrijednosti = ? ";
+
+        try {
+            PreparedStatement pstmt = conn.prepareStatement ( sql );
+            pstmt.setString (1 , stupac ) ;
+            pstmt.setString (2 , vrijednosti ) ;
+            pstmt.executeUpdate () ;
+            ResultSet rs = pstmt.executeQuery ( sql );
+            while ( rs.next () ) {
+            System.out.println ( rs.getString (stupac));
+        }
+        } catch ( SQLException e ) {
+            System.out.println ( e.getMessage () ) ;
+        }
+    }
+    
     public static void main (String args[]) {
         //SQLite baza = new SQLite();
         //baza.stvaranjeBaze();
