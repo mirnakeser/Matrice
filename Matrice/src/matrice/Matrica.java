@@ -221,18 +221,16 @@ public class Matrica implements Sucelje{
         return umnozak;
     }
     
-    
-    
+        
+        
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        double[][] m = { { 1, 0,  0 },
-                         { -20, -30,  0 },
-                         { 30, 50, 0 } };
-        Matrica M = new Matrica(m);
-        System.out.println(M.rang());
+        double[][] m = {{1,2},{2,1}};
+        KvadratnaMatrica M = new KvadratnaMatrica(m);
+        M.inverz();
     }
     
 }

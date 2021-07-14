@@ -5,6 +5,9 @@
  */
 package matrice;
 
+import org.rosuda.JRI.REXP;
+import org.rosuda.JRI.Rengine;
+
 /**
  *
  * @author Martina
@@ -86,5 +89,30 @@ public class KvadratnaMatrica extends Matrica{
             return false;
         }
     }
-
+    
+    public KvadratnaMatrica inverz(){
+        Rengine engine = Rengine.getMainEngine();
+        
+        if(engine == null)
+            engine = new Rengine(new String[] {"--vanilla"}, false, null);
+        
+        String vektor = "c(";
+        for(int i = 0; i < this.size().get(0); ++i){
+            for(int j = 0; j < this.size().get(0); ++j){
+                if(i == this.size().get(0) - 1 && j == this.size().get(0) - 1)
+                    vektor += this.matrica[i][j] + ")";
+                else
+                    vektor += this.matrica[i][j] + ",";
+            }
+        }
+        
+        String matrica = "matrix( " + vektor + ", nrow=" + this.size().get(0) + ", byrow=TRUE)";
+        engine.eval("A <-" + matrica);
+        double[][] a = engine.eval("solve(A)").asDoubleMatrix();
+        KvadratnaMatrica A = new KvadratnaMatrica(a);
+        
+        engine.end();
+        
+        return A;
+    }
 }
