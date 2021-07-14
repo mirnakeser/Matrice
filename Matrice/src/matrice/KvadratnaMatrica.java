@@ -165,4 +165,16 @@ public class KvadratnaMatrica extends Matrica{
         engine.end();
         return vec;
     }
+    
+    //NECE DA RADI
+    /*public void lu(){
+        Rengine engine = stvoriEngine();
+        String matrica = this.stvoriRMatricu();
+        
+        engine.eval("A <-" + matrica);
+        //engine.eval("luA <- lu( A )");
+        double[][] vec = engine.eval("L<-as.matrix(expand(lu(A))$L)").asDoubleMatrix();
+        
+        engine.end();
+    }*/
 }
