@@ -5,6 +5,7 @@
  */
 package matrice;
 
+import java.util.ArrayList;
 import org.rosuda.JRI.REXP;
 import org.rosuda.JRI.Rengine;
 
@@ -90,12 +91,17 @@ public class KvadratnaMatrica extends Matrica{
         }
     }
     
-    public KvadratnaMatrica inverz(){
+    private static Rengine stvoriEngine(){
         Rengine engine = Rengine.getMainEngine();
         
         if(engine == null)
             engine = new Rengine(new String[] {"--vanilla"}, false, null);
         
+        return engine;
+    }
+    
+    
+    private String stvoriRMatricu(){
         String vektor = "c(";
         for(int i = 0; i < this.size().get(0); ++i){
             for(int j = 0; j < this.size().get(0); ++j){
@@ -106,7 +112,13 @@ public class KvadratnaMatrica extends Matrica{
             }
         }
         
-        String matrica = "matrix( " + vektor + ", nrow=" + this.size().get(0) + ", byrow=TRUE)";
+        return "matrix( " + vektor + ", nrow=" + this.size().get(0) + ", byrow=TRUE)";
+    }
+    
+    public KvadratnaMatrica inverz(){
+        Rengine engine = stvoriEngine();
+        String matrica = this.stvoriRMatricu();
+        
         engine.eval("A <-" + matrica);
         double[][] a = engine.eval("solve(A)").asDoubleMatrix();
         KvadratnaMatrica A = new KvadratnaMatrica(a);
@@ -114,5 +126,17 @@ public class KvadratnaMatrica extends Matrica{
         engine.end();
         
         return A;
+    }
+    
+    public double[] dijagonala(){
+        Rengine engine = stvoriEngine();
+        String matrica = this.stvoriRMatricu();
+        
+        engine.eval("A <-" + matrica);
+        double[] d = engine.eval("diag(A)").asDoubleArray();
+        
+        engine.end();
+        
+        return d;
     }
 }
