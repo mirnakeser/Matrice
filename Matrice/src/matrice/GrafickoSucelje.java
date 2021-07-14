@@ -12,6 +12,10 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.Connection;
+import java.sql.DatabaseMetaData;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.regex.Pattern;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -554,8 +558,18 @@ public class GrafickoSucelje extends javax.swing.JFrame {
         jTextArea1.setText("");
         jTextFieldSvojstva.setText("");
         raspakirajMatricu(datoteka, 0);                  
-        if (matricaPravilnoUnesena)
+        if (matricaPravilnoUnesena) {
             jTextArea1.setText(matricaTab1.toString());
+
+            try ( Connection conn = DriverManager.getConnection ( url ) ) {
+                if ( conn != null ) {
+                    SQLite.dodajNovuMatricu(matricaTab1.toString(), conn);
+                    System.out.println("matrica dodana u bazu.");
+                }
+            } catch ( SQLException e ) {
+                System.out.println ( e.getMessage () ) ;
+            } 
+        }
             //jTextArea1.setText(upisMatriceUTextArea(unesenaMatrica));
         else
             JOptionPane.showMessageDialog(this, "Nepravilno unesena matrica!", "Greška", JOptionPane.ERROR_MESSAGE);
@@ -664,11 +678,11 @@ public class GrafickoSucelje extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Matrica nije kvadratna, ne može se izračunati traženo svojstvo!", "Upozorenje", JOptionPane.WARNING_MESSAGE);            
                 return;
             }
-            /*
-            KvadratnaMatrica km;
+            
+            KvadratnaMatrica km = new KvadratnaMatrica(matricaTab1.matrica);
             
             if(odabrano == "Simetričnost") {
-                if (matricaTab1.jeLiSimetricna()) 
+                if (km.jeLiSimetricna()) 
                     rez = "Matrica je simetrična.";
                 
                 else rez = "Matrica nije simetrična.";
@@ -678,7 +692,7 @@ public class GrafickoSucelje extends javax.swing.JFrame {
                 if (km.jeLiPozitivnoDefinitna()) rez = "Matrica je pozitivno definitna.";
                 else rez = "Matrica nije pozitivno definitna.";
             }
-            */
+            
         }
         
         //rang
@@ -848,6 +862,8 @@ public class GrafickoSucelje extends javax.swing.JFrame {
     boolean matricaPravilnoUnesena = false;
     Matrica matricaTab1, matrica1Tab2, matrica2Tab2;
     
+    //sql
+    String url = "jdbc:sqlite:matrica.db";   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
