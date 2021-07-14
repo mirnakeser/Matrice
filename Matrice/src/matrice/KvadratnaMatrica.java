@@ -139,4 +139,30 @@ public class KvadratnaMatrica extends Matrica{
         
         return d;
     }
+    
+    public double[] svojstveneVrijednosti(){
+        Rengine engine = stvoriEngine();
+        String matrica = this.stvoriRMatricu();
+        
+        engine.eval("A <-" + matrica);
+        engine.eval("y<-eigen(A)");
+        
+        double[] val = engine.eval("y$val").asDoubleArray();
+        
+        engine.end();
+        return val;
+    }
+    
+    public double[][] svojstveniVektori(){
+        Rengine engine = stvoriEngine();
+        String matrica = this.stvoriRMatricu();
+        
+        engine.eval("A <-" + matrica);
+        engine.eval("y<-eigen(A)");
+        
+        double[][] vec = engine.eval("y$vec").asDoubleMatrix();
+        
+        engine.end();
+        return vec;
+    }
 }
