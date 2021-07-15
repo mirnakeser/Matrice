@@ -95,17 +95,21 @@ public class KvadratnaMatrica extends Matrica{
     }
     
     
-    public KvadratnaMatrica inverz(){
+    public KvadratnaMatrica inverz() throws RuntimeException{
         Rengine engine = stvoriEngine();
         String matrica = this.stvoriRMatricu();
         
         engine.eval("A <-" + matrica);
-        double[][] a = engine.eval("solve(A)").asDoubleMatrix();
-        KvadratnaMatrica A = new KvadratnaMatrica(a);
+        try{
+            double[][] a = engine.eval("solve(A)").asDoubleMatrix();
+            KvadratnaMatrica A = new KvadratnaMatrica(a);
+            engine.end();
         
-        engine.end();
-        
-        return A;
+            return A;
+        }
+        catch(Exception e){
+            throw new RuntimeException("Matrica nema inverz!");
+        }
     }
     
     public double[] dijagonala(){
@@ -119,6 +123,7 @@ public class KvadratnaMatrica extends Matrica{
         
         return d;
     }
+    
     
     public double[] svojstveneVrijednosti(){
         Rengine engine = stvoriEngine();
