@@ -125,6 +125,15 @@ public class KvadratnaMatrica extends Matrica{
     }
     
     
+    public int trag(){
+        double[] d = this.dijagonala();
+        int tr = 0;
+        for(int i = 0; i < d.length; ++i)
+            tr += d[i];
+        
+        return tr;
+    }
+    
     public double[] svojstveneVrijednosti(){
         Rengine engine = stvoriEngine();
         String matrica = this.stvoriRMatricu();
