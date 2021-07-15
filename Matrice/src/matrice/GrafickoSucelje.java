@@ -811,8 +811,7 @@ public class GrafickoSucelje extends javax.swing.JFrame {
 
         String rez = "";
         
-        ImageIcon icon = new ImageIcon("wa.png");
-        ImageIcon o = new ImageIcon();
+      ImageIcon icon = new ImageIcon("wa.png");
         
         if (odabrano == "Swap") {
             String unosKorisnika = JOptionPane.showInputDialog(this, "Odaberite retke i stupac za swap:", "1,2,1");
@@ -896,6 +895,7 @@ public class GrafickoSucelje extends javax.swing.JFrame {
             try {
                 rez = matrica1Tab2.puta(matrica2Tab2);
                 jTextArea2.setText(matrica1Tab2.toString() + "\n*\n" + matrica2Tab2.toString() + "\n=\n" + rez.toString());
+                SQLite.dodajMnozenje();
             }catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Matrice nisu odgovarajućih dimenzija!", "Upozorenje", JOptionPane.WARNING_MESSAGE);            
 
