@@ -9,20 +9,20 @@ package matrice;
  *
  * @author Martina
  */
-public class NulMatrica extends KvadratnaMatrica{
+public class NulMatrica extends Matrica{
     public NulMatrica(){
-        super(3);
+        super(3,3);
         
         for(int i = 0; i < this.size().get(0); ++i)
-            for(int j = 0; j < this.size().get(0); ++j)
+            for(int j = 0; j < this.size().get(1); ++j)
                     this.matrica[i][j] = 0;
     }
     
-    public NulMatrica(int m){
-        super(m);
+    public NulMatrica(int m, int n){
+        super(m, n);
         
         for(int i = 0; i < m; ++i)
-            for(int j = 0; j < m; ++j)
+            for(int j = 0; j < n; ++j)
                     this.matrica[i][j] = 0;
     }
 }
