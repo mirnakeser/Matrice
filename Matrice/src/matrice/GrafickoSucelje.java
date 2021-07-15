@@ -127,7 +127,7 @@ public class GrafickoSucelje extends javax.swing.JFrame {
 
         jLabel9.setText("Transformacije:");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Transponiranje", "Faktorizacija Choleskog", "Swap", "Invertiranje" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Transponiranje", "Faktorizacija Choleskog", "Swap", "Invertiranje", "LU faktorizacija" }));
 
         jButton1.setText("Izračunaj!");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -853,12 +853,16 @@ public class GrafickoSucelje extends javax.swing.JFrame {
             if(odabrano == "Transponiranje") {
                 km.transponiraj();
                 SQLite.azurirajTransformacijuMatrice(1, matricaTab1.toString(), km.toString());
+                JOptionPane.showMessageDialog(this, km.toString(), "Primjena transponiranja", JOptionPane.INFORMATION_MESSAGE, icon);
+
 
             }
             else if (odabrano == "Faktorizacija Choleskog"){
                 try {
                     km.faktorizacijaCholeskog();    
                     SQLite.azurirajTransformacijuMatrice(2, matricaTab1.toString(), km.toString());
+                    JOptionPane.showMessageDialog(this, km.toString(), "Faktorizacija Choleskog", JOptionPane.INFORMATION_MESSAGE, icon);
+
 
                 } catch(Exception e) {
                     JOptionPane.showMessageDialog(this, e.getMessage(), "Upozorenje", JOptionPane.WARNING_MESSAGE);            
@@ -869,10 +873,21 @@ public class GrafickoSucelje extends javax.swing.JFrame {
             else if (odabrano == "Invertiranje") {
                 try {
                     KvadratnaMatrica inverz = km.inverz();
+                    JOptionPane.showMessageDialog(this, km.toString(), "Inverz matrice", JOptionPane.INFORMATION_MESSAGE, icon);
+
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(this, e.getMessage(), "Upozorenje", JOptionPane.WARNING_MESSAGE);            
 
                 }
+            }
+            
+            else if (odabrano == "LU faktorizacija") {
+                KvadratnaMatrica L = matricaTab1.LU.dohvatiL();
+                KvadratnaMatrica U = matricaTab1.LU.dohvatiU();
+                String ispis = "matrica L :\n" + L.toString() + "\n matrica U: \n" + U.toString();
+                JOptionPane.showMessageDialog(this, ispis, "Primjena transponiranja", JOptionPane.INFORMATION_MESSAGE, icon);
+
+
             }
         }
         
