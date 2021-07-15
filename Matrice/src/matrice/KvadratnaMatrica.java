@@ -55,7 +55,10 @@ public class KvadratnaMatrica extends Matrica{
     }
     
     public KvadratnaMatrica faktorizacijaCholeskog(){
-        KvadratnaMatrica R = new NulMatrica(this.size().get(0));
+        KvadratnaMatrica R = new KvadratnaMatrica(this.size().get(0));
+        for(int i = 0; i < R.size().get(0); ++i)
+            for(int j = 0; j < R.size().get(0); ++j)
+                R.matrica[i][j] = 0;
         double sum = 0.0;
         
         for(int j = 0; j < this.size().get(0); ++j){
@@ -166,15 +169,32 @@ public class KvadratnaMatrica extends Matrica{
         return vec;
     }
     
-    //NECE DA RADI
-    /*public void lu(){
+    
+    public void lu(){
         Rengine engine = stvoriEngine();
         String matrica = this.stvoriRMatricu();
         
+        engine.eval("require(Matrix)");
         engine.eval("A <-" + matrica);
         //engine.eval("luA <- lu( A )");
         double[][] vec = engine.eval("L<-as.matrix(expand(lu(A))$L)").asDoubleMatrix();
         
         engine.end();
-    }*/
+    }
+    
+    
+    public void luFaktorizacija(){
+        Rengine engine = stvoriEngine();
+        String matrica = this.stvoriRMatricu();
+        
+        engine.eval("require(\"matrixcalc\")");
+        engine.eval("library(matrixcalc)");
+        engine.eval("A <-" + matrica);
+        engine.eval("luA <- lu.decomposition( A )");
+        double[][] vec = engine.eval("L<-as.matrix(luA$L)").asDoubleMatrix();
+        
+        System.out.println(vec[0][0]);
+        
+        engine.end();
+    }
 }
