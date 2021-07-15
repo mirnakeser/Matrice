@@ -94,29 +94,6 @@ public class KvadratnaMatrica extends Matrica{
         }
     }
     
-    private static Rengine stvoriEngine(){
-        Rengine engine = Rengine.getMainEngine();
-        
-        if(engine == null)
-            engine = new Rengine(new String[] {"--vanilla"}, false, null);
-        
-        return engine;
-    }
-    
-    
-    private String stvoriRMatricu(){
-        String vektor = "c(";
-        for(int i = 0; i < this.size().get(0); ++i){
-            for(int j = 0; j < this.size().get(0); ++j){
-                if(i == this.size().get(0) - 1 && j == this.size().get(0) - 1)
-                    vektor += this.matrica[i][j] + ")";
-                else
-                    vektor += this.matrica[i][j] + ",";
-            }
-        }
-        
-        return "matrix( " + vektor + ", nrow=" + this.size().get(0) + ", byrow=TRUE)";
-    }
     
     public KvadratnaMatrica inverz(){
         Rengine engine = stvoriEngine();
@@ -169,32 +146,4 @@ public class KvadratnaMatrica extends Matrica{
         return vec;
     }
     
-    
-    public void lu(){
-        Rengine engine = stvoriEngine();
-        String matrica = this.stvoriRMatricu();
-        
-        engine.eval("require(Matrix)");
-        engine.eval("A <-" + matrica);
-        //engine.eval("luA <- lu( A )");
-        double[][] vec = engine.eval("L<-as.matrix(expand(lu(A))$L)").asDoubleMatrix();
-        
-        engine.end();
-    }
-    
-    
-    public void luFaktorizacija(){
-        Rengine engine = stvoriEngine();
-        String matrica = this.stvoriRMatricu();
-        
-        engine.eval("require(\"matrixcalc\")");
-        engine.eval("library(matrixcalc)");
-        engine.eval("A <-" + matrica);
-        engine.eval("luA <- lu.decomposition( A )");
-        double[][] vec = engine.eval("L<-as.matrix(luA$L)").asDoubleMatrix();
-        
-        System.out.println(vec[0][0]);
-        
-        engine.end();
-    }
 }

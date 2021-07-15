@@ -10,6 +10,7 @@ import java.util.Random;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+import org.rosuda.JRI.Rengine;
 
 /**
  *
@@ -20,6 +21,7 @@ import java.util.concurrent.TimeUnit;
 public class Matrica implements Sucelje{
     int brRedaka, brStupaca;
     double[][] matrica;
+    LUFaktorizacija LU = new LUFaktorizacija();
     
     /**
      * Defaultni konstruktor stvara matricu dimenzije 5x5 i popuni ju 
@@ -170,7 +172,6 @@ public class Matrica implements Sucelje{
         for( int i = 0; i < m; ++i ){
             trd.execute(new Zbrajanje(this, M, zbroj, i));
         }
-      
         trd.shutdown();
         trd.awaitTermination(1, TimeUnit.MINUTES);
         
@@ -207,18 +208,77 @@ public class Matrica implements Sucelje{
         int n = this.size().get(1);
         int k = M.size().get(1);
         
-        Matrica umnozak = new Matrica(m, k);
+        Matrica umnozak = new NulMatrica(m, k);
         int z = Runtime.getRuntime().availableProcessors();
         ThreadPoolExecutor trd = new ThreadPoolExecutor(z, z, 100, TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(m));
         
         for( int i = 0; i < m; ++i ){
             trd.execute(new Mnozenje(this, M, umnozak, i));
         }
-      
+        
         trd.shutdown();
         trd.awaitTermination(1, TimeUnit.MINUTES);
         
         return umnozak;
+    }
+    
+    protected static Rengine stvoriEngine(){
+        Rengine engine = Rengine.getMainEngine();
+        
+        if(engine == null)
+            engine = new Rengine(new String[] {"--vanilla"}, false, null);
+        
+        return engine;
+    }
+    
+    
+    protected String stvoriRMatricu(){
+        String vektor = "c(";
+        for(int i = 0; i < this.size().get(0); ++i){
+            for(int j = 0; j < this.size().get(0); ++j){
+                if(i == this.size().get(0) - 1 && j == this.size().get(0) - 1)
+                    vektor += this.matrica[i][j] + ")";
+                else
+                    vektor += this.matrica[i][j] + ",";
+            }
+        }
+        
+        return "matrix( " + vektor + ", nrow=" + this.size().get(0) + ", byrow=TRUE)";
+    }
+    
+    
+    public class LUFaktorizacija {
+        public KvadratnaMatrica dohvatiL(){
+            Rengine engine = stvoriEngine();
+            String matrica = Matrica.this.stvoriRMatricu();
+
+            engine.eval("require(Matrix)");
+            engine.eval("A <-" + matrica);
+            engine.eval("luA <- lu( A )");
+            double[][] l = engine.eval("L<-as.matrix(expand(luA)$L)").asDoubleMatrix();
+
+            engine.end();
+            
+            KvadratnaMatrica L = new KvadratnaMatrica(l);
+            
+            return L;
+        }
+        
+        public KvadratnaMatrica dohvatiU(){
+            Rengine engine = stvoriEngine();
+            String matrica = Matrica.this.stvoriRMatricu();
+
+            engine.eval("require(Matrix)");
+            engine.eval("A <-" + matrica);
+            engine.eval("luA <- lu( A )");
+            double[][] u = engine.eval("L<-as.matrix(expand(luA)$U)").asDoubleMatrix();
+
+            engine.end();
+            
+            KvadratnaMatrica U = new KvadratnaMatrica(u);
+            
+            return U;
+        }
     }
     
         
@@ -230,7 +290,7 @@ public class Matrica implements Sucelje{
         // TODO code application logic here
         double[][] m = {{1,2},{2,1}};
         KvadratnaMatrica M = new KvadratnaMatrica(m);
-        M.inverz();
+        System.out.println(M.LU.dohvatiU().toString());
     }
     
 }
