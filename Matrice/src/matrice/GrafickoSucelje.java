@@ -115,7 +115,7 @@ public class GrafickoSucelje extends javax.swing.JFrame {
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Simetričnost", "Rang", "Pozitivna definitnost" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Simetričnost", "Rang", "Pozitivna definitnost", "Dijagonala", "Trag", "Regularnost", "Svojstvene vrijednosti" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -124,7 +124,7 @@ public class GrafickoSucelje extends javax.swing.JFrame {
 
         jLabel9.setText("Transformacije:");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Transponiranje", "Faktorizacija Choleskog", "Swap" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Transponiranje", "Faktorizacija Choleskog", "Swap", "Invertiranje" }));
 
         jButton1.setText("Izračunaj!");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -673,7 +673,7 @@ public class GrafickoSucelje extends javax.swing.JFrame {
         jTextFieldSvojstva.setText("");
         String rez = "";
         jComboBox1.setSelectedIndex(0);
-        if(odabrano == "Simetričnost" || odabrano == "Pozitivna definitnost") {
+        if(odabrano != "Rang") {
             if (matricaTab1.brRedaka != matricaTab1.brStupaca) {
                 JOptionPane.showMessageDialog(this, "Matrica nije kvadratna, ne može se izračunati traženo svojstvo!", "Upozorenje", JOptionPane.WARNING_MESSAGE);            
                 return;
@@ -686,16 +686,14 @@ public class GrafickoSucelje extends javax.swing.JFrame {
                 if (km.jeLiSimetricna())  {
                     rez = "Matrica je simetrična.";
                     SQLite.azurirajSvojstvoMatrice(2, matricaTab1.toString(), 1);
-
                 }
-                
                 else {
                     rez = "Matrica nije simetrična.";
                     SQLite.azurirajSvojstvoMatrice(2, matricaTab1.toString(), 0);
                 }
             }
             // poztivna definitnost
-            else {
+            else if (odabrano == "Pozitivna definitnost"){
                 if (km.jeLiPozitivnoDefinitna())  {
                     rez = "Matrica je pozitivno definitna.";
                     SQLite.azurirajSvojstvoMatrice(3, matricaTab1.toString(), 1);
@@ -704,7 +702,34 @@ public class GrafickoSucelje extends javax.swing.JFrame {
                     rez = "Matrica nije pozitivno definitna.";
                     SQLite.azurirajSvojstvoMatrice(3, matricaTab1.toString(), 0);
                 }
-            }           
+            }
+            /*
+            else if (odabrano == "Dijagonala") {
+                double[] dijagonala = km.dijagonala();
+                rez = "Dijagonala matrice je [";
+                for (int i = 0; i < dijagonala.length-1; i++) 
+                    rez += String.valueOf(dijagonala[i]);
+                    rez += ", ";
+                rez += String.valueOf(dijagonala[dijagonala.length-1]);
+                rez += "].";
+            }
+            else if (odabrano == "Trag") {
+                rez = "Trag matrice je " + km.trag() + ".";
+            }
+            else if (odabrano == "Regularnost") {
+                rez = "Matrica ";
+                if(!km.jeLiRegularna()) rez += "ni";
+                rez += "je regularna.";
+            }
+            else if (odabrano == "Svojstvene vrijednosti") {
+                double[] sv = km.svojstveneVrijednosti();
+                for (int i = 0; i < sv.length-1; i++) 
+                    rez += String.valueOf(sv[i]);
+                    rez += ", ";
+                rez += String.valueOf(sv[sv.length-1]);
+                rez += "].";
+            }
+            */
         }
         
         //rang
@@ -783,7 +808,7 @@ public class GrafickoSucelje extends javax.swing.JFrame {
                 SQLite.azurirajTransformacijuMatrice(1, matricaTab1.toString(), km.toString());
 
             }
-            else {
+            else if (odabrano == "Faktorizacija Choleskog"){
                 try {
                     km.faktorizacijaCholeskog();    
                     SQLite.azurirajTransformacijuMatrice(2, matricaTab1.toString(), km.toString());
@@ -793,6 +818,14 @@ public class GrafickoSucelje extends javax.swing.JFrame {
 
                 }
                 
+            }
+            else if (odabrano == "Invertiranje") {
+                try {
+                    KvadratnaMatrica inverz = km.inverz();
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(this, e.getMessage(), "Upozorenje", JOptionPane.WARNING_MESSAGE);            
+
+                }
             }
         }
         
