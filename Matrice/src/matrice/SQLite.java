@@ -38,6 +38,19 @@ public class SQLite {
         } 
     }
     
+    private static void stvaranjeBazeVremena() {
+        url = "jdbc:sqlite:vremena.db";
+        try ( Connection conn = DriverManager.getConnection ( url ) ) {
+            if ( conn != null ) {
+                DatabaseMetaData meta = conn.getMetaData () ;
+                System.out.println ("Ime biblioteke za rad s bazom podataka " + meta.getDriverName () ) ;
+                System.out.println ("Stvorena je nova baza.") ;
+            }
+        } catch ( SQLException e ) {
+            System.out.println ( e.getMessage () ) ;
+        } 
+    }
+    
     // kreira se tablica u bazi matrica u koju ce se pohranjivati pravilno unesene matrice 
     // 1 poziv
     private static void stvaranjeTablice() {
@@ -58,6 +71,27 @@ public class SQLite {
                         + " swap text \n"
                         + ");";
         
+        try ( Connection conn = DriverManager.getConnection ( url ) ;
+        Statement stmt = conn.createStatement () ) {
+            if ( conn != null ) { stmt.execute ( sql ) ;}
+        } catch ( SQLException e ) {
+            System.out.println ( e.getMessage () ) ; } 
+    }
+    
+    private static void stvaranjeTabliceVremena() {
+        
+        
+        //simetricnost i poz. definitnost:
+        // -1 ako jos nije izracunato (ili ako matrica nije kvadratna)
+        // 0 ako matrica nije sim. / poz. def.
+        // 1 ako matrica je sim. / poz.def.
+        // rang po defaultu -1
+        sql = " CREATE TABLE IF NOT EXISTS mnozenje (\n"
+                        + " id integer PRIMARY KEY, \n"
+                        + " brElemenata integer NOT NULL, \n"
+                        + " vrijeme integer NOT NULL \n"
+                        + ");";
+
         try ( Connection conn = DriverManager.getConnection ( url ) ;
         Statement stmt = conn.createStatement () ) {
             if ( conn != null ) { stmt.execute ( sql ) ;}
@@ -90,6 +124,18 @@ public class SQLite {
        . insert (" Karmen "," Karlovic " ,61 , conn ) ; Ub . insert (" Maja ","
        Smjeskic " ,20 , conn ) ;
 */
+    
+    public void dodajMnozenje( int brElem, int vr ){
+        String  sql = "INSERT INTO mnozenje(brElemenata, vrijeme) VALUES (?,?)";
+        try( Connection conn = DriverManager.getConnection( url ) ) {
+            PreparedStatement ps = conn.prepareStatement( sql );
+            ps.setInt ( 1, brElem );
+            ps.setInt ( 2, vr );
+            ps.executeUpdate();          
+        } catch( SQLException e ){
+            System.out.println( e.getMessage() );
+        }
+    }
     
     private static boolean pomocnaSvojstvo(int opcija) {
         if( opcija == 1 )
@@ -199,8 +245,8 @@ public class SQLite {
     }
     
     public static void main (String args[]) {
-        SQLite.stvaranjeBaze();
-        SQLite.stvaranjeTablice();
+        SQLite.stvaranjeBazeVremena();
+        SQLite.stvaranjeTabliceVremena();
     }
     
     
