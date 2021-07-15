@@ -21,7 +21,7 @@ import java.sql.ResultSet;
  */
 public class SQLite {
     private static String imeBaze = "matrica.db";
-    private static String url = "jdbc:sqlite:" + imeBaze ;
+    private static String url = "jdbc:sqlite:" + imeBaze;
     private static String stupac = "", sql = "";
 
     // kreira se baza podataka s nazivom matrica u koju ce se pohranjivati pravilno unesene matrice 
@@ -123,37 +123,37 @@ public class SQLite {
     // u bazi se takoder azurira taj podatak
     // istom fjom se unosi sve, saljemo u fju info o tome koji podatak o matrici smo izracunali
     public static void azurirajSvojstvoMatrice ( int opcija, String vrijednosti , int novaVrijednost ) {
-        
-       if(!pomocnaSvojstvo(opcija))
-            return;
-                    
-        sql = " UPDATE matrice SET " + stupac + " = ? WHERE vrijednosti = ?";
+       
+        boolean zastavica = pomocnaSvojstvo(opcija);
+        if(zastavica) {
+           sql = "UPDATE matrice SET " + stupac + " = ? WHERE vrijednosti = ?";
 
-        try (Connection conn = DriverManager.getConnection(url) ) {
-            PreparedStatement pstmt = conn.prepareStatement ( sql );
-            pstmt.setInt (1 , novaVrijednost ) ;
-            pstmt.setString (2 , vrijednosti ) ;
-            pstmt.executeUpdate () ;
-        } catch ( SQLException e ) {
-            System.out.println ( e.getMessage () ) ;
+            try (Connection conn = DriverManager.getConnection(url) ) {
+                PreparedStatement pstmt = conn.prepareStatement ( sql );
+                pstmt.setInt (1 , novaVrijednost ) ;
+                pstmt.setString (2 , vrijednosti ) ;
+                pstmt.executeUpdate();
+                System.out.println ("upisano svojstvo");
+            } catch ( SQLException e ) {
+                System.out.println ( e.getMessage () ) ;
+            }
         }
     }
 
     public static void azurirajTransformacijuMatrice ( int opcija, String vrijednosti , String novaVrijednost ) {
-        if(!pomocnaTransformacija(opcija))
-            return;
-                    
-        sql = " UPDATE matrice SET ? = ? WHERE vrijednosti = ?";
+        boolean zastavica = pomocnaTransformacija(opcija);
+        if(zastavica) {
+            sql = "UPDATE matrice SET " + stupac + " = ? WHERE vrijednosti = ?";
 
-        try (Connection conn = DriverManager.getConnection(url) ) {
-            PreparedStatement pstmt = conn.prepareStatement ( sql );
-            pstmt.setString (1 , stupac ) ;
-            pstmt.setString (2 , novaVrijednost ) ;
-            pstmt.setString (3 , vrijednosti ) ;
-            pstmt.executeUpdate () ;
-        } catch ( SQLException e ) {
-            System.out.println ( e.getMessage () ) ;
-        }
+            try (Connection conn = DriverManager.getConnection(url) ) {
+                PreparedStatement pstmt = conn.prepareStatement ( sql );
+                pstmt.setString (1 , novaVrijednost ) ;
+                pstmt.setString (2 , vrijednosti ) ;
+                pstmt.executeUpdate();
+            } catch ( SQLException e ) {
+                System.out.println ( e.getMessage () ) ;
+            }    
+        }                  
     }
     
     public static void selectSvojstvo ( String vrijednosti, int opcija ) {

@@ -15,6 +15,7 @@ import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.regex.Pattern;
 import javax.swing.JFileChooser;
@@ -710,8 +711,17 @@ public class GrafickoSucelje extends javax.swing.JFrame {
         else {
             int rang = matricaTab1.rang();
             rez = "Rang matrice je " + String.valueOf(rang) + ".";
-            SQLite.azurirajSvojstvoMatrice(1, matricaTab1.toString(), rang);           
-        }
+            String sql = "UPDATE matrice SET rang = ? WHERE vrijednosti = ?";
+
+            try (Connection conn = DriverManager.getConnection(url) ) {
+                PreparedStatement pstmt = conn.prepareStatement ( sql );
+                pstmt.setInt (1 , rang ) ;
+                pstmt.setString (2 , matricaTab1.toString()) ;
+                pstmt.executeUpdate();
+                System.out.println ("upisano svojstvo");
+            } catch ( SQLException e ) {
+                System.out.println ( e.getMessage () ) ;
+            }        }
         jTextFieldSvojstva.setText(rez);
 
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -758,8 +768,8 @@ public class GrafickoSucelje extends javax.swing.JFrame {
                 }
             }
             Matrica matswap  = new Matrica (matricaTab1.matrica);
-            matswap.swap(vrijednostiInt[0], vrijednostiInt[1], vrijednostiInt[2]);
-       
+            matswap.swap(vrijednostiInt[0]-1, vrijednostiInt[1]-1, vrijednostiInt[2]-1);
+            SQLite.azurirajTransformacijuMatrice(3, matricaTab1.toString(), matswap.toString());
         }
         else {
             if (matricaTab1.brRedaka != matricaTab1.brStupaca) {
@@ -770,10 +780,14 @@ public class GrafickoSucelje extends javax.swing.JFrame {
             KvadratnaMatrica km = new KvadratnaMatrica(matricaTab1.matrica);
             if(odabrano == "Transponiranje") {
                 km.transponiraj();
+                SQLite.azurirajTransformacijuMatrice(1, matricaTab1.toString(), km.toString());
+
             }
             else {
                 try {
                     km.faktorizacijaCholeskog();    
+                    SQLite.azurirajTransformacijuMatrice(2, matricaTab1.toString(), km.toString());
+
                 } catch(Exception e) {
                     JOptionPane.showMessageDialog(this, e.getMessage(), "Upozorenje", JOptionPane.WARNING_MESSAGE);            
 
