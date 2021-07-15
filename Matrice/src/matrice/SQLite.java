@@ -39,7 +39,7 @@ public class SQLite {
     }
     
     private static void stvaranjeBazeVremena() {
-        url = "jdbc:sqlite:vremena.db";
+        //url = "jdbc:sqlite:vremena.db";
         try ( Connection conn = DriverManager.getConnection ( url ) ) {
             if ( conn != null ) {
                 DatabaseMetaData meta = conn.getMetaData () ;
@@ -55,7 +55,7 @@ public class SQLite {
     // 1 poziv
     private static void stvaranjeTablice() {
         
-        
+        url = "jdbc:sqlite:" + imeBaze;
         //simetricnost i poz. definitnost:
         // -1 ako jos nije izracunato (ili ako matrica nije kvadratna)
         // 0 ako matrica nije sim. / poz. def.
@@ -125,7 +125,7 @@ public class SQLite {
        Smjeskic " ,20 , conn ) ;
 */
     
-    public void dodajMnozenje( int brElem, int vr ){
+    public static void dodajMnozenje( int brElem, int vr ){
         String  sql = "INSERT INTO mnozenje(brElemenata, vrijeme) VALUES (?,?)";
         try( Connection conn = DriverManager.getConnection( url ) ) {
             PreparedStatement ps = conn.prepareStatement( sql );
@@ -245,8 +245,8 @@ public class SQLite {
     }
     
     public static void main (String args[]) {
-        SQLite.stvaranjeBazeVremena();
-        SQLite.stvaranjeTabliceVremena();
+        //SQLite.stvaranjeBazeVremena();
+        //SQLite.stvaranjeTabliceVremena();
     }
     
     
