@@ -100,6 +100,7 @@ public class GrafickoSucelje extends javax.swing.JFrame {
             }
         });
 
+        jTextFieldSvojstva.setEditable(false);
         jTextFieldSvojstva.setName("jTextFieldSvojstva"); // NOI18N
         jTextFieldSvojstva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -241,6 +242,7 @@ public class GrafickoSucelje extends javax.swing.JFrame {
             }
         });
 
+        jTextArea2.setEditable(false);
         jTextArea2.setColumns(20);
         jTextArea2.setRows(5);
         jScrollPane1.setViewportView(jTextArea2);
@@ -648,7 +650,7 @@ public class GrafickoSucelje extends javax.swing.JFrame {
         if(!matrica2PravilnoUnesena)
             JOptionPane.showMessageDialog(this, "Nepravilno unesena matrica!", "Greška", JOptionPane.ERROR_MESSAGE);
         else {
-            jTextFieldUnosMatrice1.setText("");
+            jTextFieldUnosMatrice2.setText("");
             if (!matrica1PravilnoUnesena) 
                 jTextArea2.setText("Matrica 2:\n" + matrica1Tab2.toString());       
             else
@@ -716,6 +718,8 @@ public class GrafickoSucelje extends javax.swing.JFrame {
         
         String odabrano = jComboBox2.getSelectedItem().toString();
         jTextFieldSvojstva.setText("");
+        jComboBox2.setSelectedIndex(0);
+
         String rez = "";
         
         if (odabrano == "Swap") {
@@ -758,7 +762,13 @@ public class GrafickoSucelje extends javax.swing.JFrame {
                 km.transponiraj();
             }
             else {
-                km.faktorizacijaCholeskog();
+                try {
+                    km.faktorizacijaCholeskog();    
+                } catch(Exception e) {
+                    JOptionPane.showMessageDialog(this, e.getMessage(), "Upozorenje", JOptionPane.WARNING_MESSAGE);            
+
+                }
+                
             }
         }
         
