@@ -16,6 +16,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.regex.Pattern;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -64,6 +66,7 @@ public class GrafickoSucelje extends javax.swing.JFrame {
         jComboBox2 = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -140,6 +143,8 @@ public class GrafickoSucelje extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setName(""); // NOI18N
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -171,8 +176,10 @@ public class GrafickoSucelje extends javax.swing.JFrame {
                                     .addComponent(jButtonUcitajMatricu, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(76, 76, 76)
-                        .addComponent(jTextFieldSvojstva, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(94, Short.MAX_VALUE))
+                        .addComponent(jTextFieldSvojstva, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(49, 49, 49)
+                        .addComponent(jLabel1)))
+                .addContainerGap(87, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -196,7 +203,9 @@ public class GrafickoSucelje extends javax.swing.JFrame {
                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton5))
                 .addGap(36, 36, 36)
-                .addComponent(jTextFieldSvojstva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldSvojstva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
                 .addGap(129, 129, 129))
         );
 
@@ -673,6 +682,10 @@ public class GrafickoSucelje extends javax.swing.JFrame {
         jTextFieldSvojstva.setText("");
         String rez = "";
         jComboBox1.setSelectedIndex(0);
+        long start = 0;
+        long finish = 0;
+        long timeElapsed = 0;
+                
         if(odabrano != "Rang") {
             if (matricaTab1.brRedaka != matricaTab1.brStupaca) {
                 JOptionPane.showMessageDialog(this, "Matrica nije kvadratna, ne može se izračunati traženo svojstvo!", "Upozorenje", JOptionPane.WARNING_MESSAGE);            
@@ -682,8 +695,12 @@ public class GrafickoSucelje extends javax.swing.JFrame {
             KvadratnaMatrica km = new KvadratnaMatrica(matricaTab1.matrica);
             
             if(odabrano == "Simetričnost") {
+                start = System.nanoTime();
+                boolean simetricna = km.jeLiSimetricna();
+                finish = System.nanoTime();
+                timeElapsed = finish - start;
                 
-                if (km.jeLiSimetricna())  {
+                if (simetricna)  {
                     rez = "Matrica je simetrična.";
                     SQLite.azurirajSvojstvoMatrice(2, matricaTab1.toString(), 1);
                 }
@@ -694,7 +711,12 @@ public class GrafickoSucelje extends javax.swing.JFrame {
             }
             // poztivna definitnost
             else if (odabrano == "Pozitivna definitnost"){
-                if (km.jeLiPozitivnoDefinitna())  {
+                start = System.nanoTime();
+                boolean pozDef = km.jeLiPozitivnoDefinitna();
+                finish = System.nanoTime();
+                timeElapsed = finish - start;
+                
+                if (pozDef)  {
                     rez = "Matrica je pozitivno definitna.";
                     SQLite.azurirajSvojstvoMatrice(3, matricaTab1.toString(), 1);
                 }
@@ -705,7 +727,11 @@ public class GrafickoSucelje extends javax.swing.JFrame {
             }
             
             else if (odabrano == "Dijagonala") {
+                start = System.nanoTime();
                 double[] dijagonala = km.dijagonala();
+                finish = System.nanoTime();
+                timeElapsed = finish - start;
+                
                 rez = "Dijagonala matrice je [";
                 for (int i = 0; i < dijagonala.length-1; i++) 
                     rez += String.valueOf(dijagonala[i]);
@@ -714,15 +740,29 @@ public class GrafickoSucelje extends javax.swing.JFrame {
                 rez += "].";
             }
             else if (odabrano == "Trag") {
-                rez = "Trag matrice je " + km.trag() + ".";
+                start = System.nanoTime();
+                int trag = km.trag();
+                finish = System.nanoTime();
+                timeElapsed = finish - start;
+                
+                rez = "Trag matrice je " + trag + ".";
             }
             else if (odabrano == "Regularnost") {
                 rez = "Matrica ";
-                if(!km.jeLiRegularna()) rez += "ni";
+                start = System.nanoTime();
+                boolean regularna = km.jeLiRegularna();
+                finish = System.nanoTime();
+                timeElapsed = finish - start;
+                
+                if(!regularna) rez += "ni";
                 rez += "je regularna.";
             }
             else if (odabrano == "Svojstvene vrijednosti") {
+                start = System.nanoTime();
                 double[] sv = km.svojstveneVrijednosti();
+                finish = System.nanoTime();
+                timeElapsed = finish - start;
+                
                 for (int i = 0; i < sv.length-1; i++) 
                     rez += String.valueOf(sv[i]);
                     rez += ", ";
@@ -734,7 +774,11 @@ public class GrafickoSucelje extends javax.swing.JFrame {
         
         //rang
         else {
+            start = System.nanoTime();
             int rang = matricaTab1.rang();
+            finish = System.nanoTime();
+            timeElapsed = finish - start;
+            System.out.println(String.valueOf(timeElapsed));
             rez = "Rang matrice je " + String.valueOf(rang) + ".";
             String sql = "UPDATE matrice SET rang = ? WHERE vrijednosti = ?";
 
@@ -748,7 +792,7 @@ public class GrafickoSucelje extends javax.swing.JFrame {
                 System.out.println ( e.getMessage () ) ;
             }        }
         jTextFieldSvojstva.setText(rez);
-
+        jLabel1.setText(String.valueOf(timeElapsed) + " ns");
     }//GEN-LAST:event_jButton1ActionPerformed
     // TRANSFORMIRAJ BUTTON
     //ponasa se ekvivalentno kao gornja fja za izracunaj
@@ -952,6 +996,7 @@ public class GrafickoSucelje extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JEditorPane jEditorPane1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
