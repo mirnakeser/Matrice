@@ -134,6 +134,14 @@ public class KvadratnaMatrica extends Matrica{
         return tr;
     }
     
+    
+    public boolean jeLiRegularna(){
+        if(this.rang() == this.size().get(0))
+            return true;
+        else
+            return false;
+    }
+    
     public double[] svojstveneVrijednosti(){
         Rengine engine = stvoriEngine();
         String matrica = this.stvoriRMatricu();
