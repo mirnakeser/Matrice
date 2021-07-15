@@ -81,13 +81,7 @@ public class SQLite {
     
     private static void stvaranjeTabliceVremena() {
         
-        
-        //simetricnost i poz. definitnost:
-        // -1 ako jos nije izracunato (ili ako matrica nije kvadratna)
-        // 0 ako matrica nije sim. / poz. def.
-        // 1 ako matrica je sim. / poz.def.
-        // rang po defaultu -1
-        sql = " CREATE TABLE IF NOT EXISTS mnozenje (\n"
+        sql = " CREATE TABLE IF NOT EXISTS oduzimanje (\n"
                         + " id integer PRIMARY KEY, \n"
                         + " brElemenata integer NOT NULL, \n"
                         + " vrijeme integer NOT NULL \n"
@@ -295,7 +289,7 @@ public class SQLite {
     
     public static void main (String args[]) {
         //SQLite.stvaranjeBazeVremena();
-        //SQLite.stvaranjeTabliceVremena();
+        SQLite.stvaranjeTabliceVremena();
     }
     
     
