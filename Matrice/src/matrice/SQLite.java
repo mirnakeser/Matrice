@@ -15,6 +15,7 @@ import java.sql.ResultSet;
 
 
 
+
 /**
  *
  * @author Leonardo Lionel
@@ -242,6 +243,54 @@ public class SQLite {
         } catch ( SQLException e ) {
             System.out.println ( e.getMessage () ) ;
         }
+    }
+    
+    public static int[] selectElementi() {
+        int[] rez = new int[0];
+        
+        sql = " SELECT brElemenata FROM mnozenje ";
+
+        try (Connection conn = DriverManager.getConnection(url) ) {
+            PreparedStatement pstmt = conn.prepareStatement ( sql );
+            //pstmt.executeUpdate () ;
+            ResultSet rs = pstmt.executeQuery ( sql );
+            rs.last();
+            int size = rs.getRow();
+            rs.beforeFirst();
+            rez = new int[size];
+            int i = 0;
+            while ( rs.next () ) {
+                rez[i] = rs.getInt("brElemenata");
+                i++;
+        }
+        } catch ( SQLException e ) {
+            System.out.println ( e.getMessage () ) ;
+        }
+        return rez;
+    }
+    
+    public static int[] selectVremena() {
+        int[] rez = new int[0];
+        
+        sql = " SELECT vrijeme FROM mnozenje ";
+
+        try (Connection conn = DriverManager.getConnection(url) ) {
+            PreparedStatement pstmt = conn.prepareStatement ( sql );
+            //pstmt.executeUpdate () ;
+            ResultSet rs = pstmt.executeQuery ( sql );
+            rs.last();
+            int size = rs.getRow();
+            rs.beforeFirst();
+            rez = new int[size];
+            int i = 0;
+            while ( rs.next () ) {
+                rez[i] = rs.getInt("vrijeme");
+                i++;
+        }
+        } catch ( SQLException e ) {
+            System.out.println ( e.getMessage () ) ;
+        }
+        return rez;
     }
     
     public static void main (String args[]) {
