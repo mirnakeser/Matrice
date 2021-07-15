@@ -703,7 +703,7 @@ public class GrafickoSucelje extends javax.swing.JFrame {
                     SQLite.azurirajSvojstvoMatrice(3, matricaTab1.toString(), 0);
                 }
             }
-            /*
+            
             else if (odabrano == "Dijagonala") {
                 double[] dijagonala = km.dijagonala();
                 rez = "Dijagonala matrice je [";
@@ -727,9 +727,9 @@ public class GrafickoSucelje extends javax.swing.JFrame {
                     rez += String.valueOf(sv[i]);
                     rez += ", ";
                 rez += String.valueOf(sv[sv.length-1]);
-                rez += "].";
+                rez += ".";
             }
-            */
+            
         }
         
         //rang
