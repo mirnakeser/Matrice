@@ -54,7 +54,7 @@ public class KvadratnaMatrica extends Matrica{
         return true;
     }
     
-    public KvadratnaMatrica faktorizacijaCholeskog(){
+    public KvadratnaMatrica faktorizacijaCholeskog() throws RuntimeException{
         KvadratnaMatrica R = new KvadratnaMatrica(this.size().get(0));
         for(int i = 0; i < R.size().get(0); ++i)
             for(int j = 0; j < R.size().get(0); ++j)
