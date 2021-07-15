@@ -898,7 +898,6 @@ public class GrafickoSucelje extends javax.swing.JFrame {
                 long finish = System.currentTimeMillis();
                 long result = finish - start;
                 jTextArea2.setText(matrica1Tab2.toString() + "\n*\n" + matrica2Tab2.toString() + "\n=\n" + rez.toString());
-                //umjesto 0 stavit vrijeme potrebno za mnozenje
                 SQLite.dodajMnozenje(rez.brRedaka*rez.brStupaca, (int)result);
             }catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Matrice nisu odgovarajućih dimenzija!", "Upozorenje", JOptionPane.WARNING_MESSAGE);            
