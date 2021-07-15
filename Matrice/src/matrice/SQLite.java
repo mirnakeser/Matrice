@@ -44,14 +44,15 @@ public class SQLite {
         
         
         //simetricnost i poz. definitnost:
-        // -1 ako matrica nije kvasdratna
+        // -1 ako jos nije izracunato (ili ako matrica nije kvadratna)
         // 0 ako matrica nije sim. / poz. def.
         // 1 ako matrica je sim. / poz.def.
+        // rang po defaultu -1
         sql = " CREATE TABLE IF NOT EXISTS matrice (\n"
-                        + " vrijenodnosti text PRIMARY KEY, \n"
+                        + " vrijednosti text PRIMARY KEY, \n"
                         + " rang integer, \n"
                         + " simetricnost integer, \n"
-                        + " pozitivnaDefinitnost integer \n"
+                        + " pozitivnaDefinitnost integer, \n"
                         + " transponirana text, \n"
                         + " faktorizacijaCholeskog text, \n"
                         + " swap text \n"
@@ -67,15 +68,19 @@ public class SQLite {
     // dodavanje matricu u bazu
     // po unosenju matrice znamo samo njene vrijednosti,
     // ostala svojstva se mogu i ne moraju naknadno izracunati ovisno o zahtjevima korisnika
-    public static void dodajNovuMatricu ( String vrijednosti, Connection conn ) {
-        sql = " INSERT INTO matrica ( vrijednosti ) VALUES (?)";
+    public static void dodajNovuMatricu ( String vrijednosti) {
+        sql = " INSERT INTO matrice ( vrijednosti, rang, simetricnost, pozitivnaDefinitnost, transponirana, faktorizacijaCholeskog, swap ) VALUES (?, -1, -1, -1, ?, ?, ? )";
 
-        try {
+        
+        try (Connection conn = DriverManager.getConnection(url) ) {
             PreparedStatement pstmt = conn.prepareStatement ( sql ) ;
             pstmt.setString (1 , vrijednosti ) ;
+            pstmt.setString (2 , "" ) ;
+            pstmt.setString (3 , "" ) ;
+            pstmt.setString (4 , "" ) ;
             pstmt.executeUpdate () ;
         }
-        catch ( SQLException e ) { } 
+        catch ( SQLException e ) {System.out.println ( e.getMessage () ) ; } 
     }
 
         // poziv u programu
@@ -117,15 +122,14 @@ public class SQLite {
     // nakon sto korisnik trazi da se izracuna neko od svostava matrice,
     // u bazi se takoder azurira taj podatak
     // istom fjom se unosi sve, saljemo u fju info o tome koji podatak o matrici smo izracunali
-    public static void azurirajSvojstvoMatrice ( int opcija, String vrijednosti , int novaVrijednost, Connection conn ) {
+    public static void azurirajSvojstvoMatrice ( int opcija, String vrijednosti , int novaVrijednost ) {
         
        if(!pomocnaSvojstvo(opcija))
             return;
                     
-        sql = " UPDATE matrica SET " + stupac + " = ? , "
-                        + " WHERE vrijednosti = ?";
+        sql = " UPDATE matrice SET " + stupac + " = ? WHERE vrijednosti = ?";
 
-        try {
+        try (Connection conn = DriverManager.getConnection(url) ) {
             PreparedStatement pstmt = conn.prepareStatement ( sql );
             pstmt.setInt (1 , novaVrijednost ) ;
             pstmt.setString (2 , vrijednosti ) ;
@@ -135,13 +139,13 @@ public class SQLite {
         }
     }
 
-    public static void azurirajTransformacijuMatrice ( int opcija, String vrijednosti , String novaVrijednost, Connection conn ) {
+    public static void azurirajTransformacijuMatrice ( int opcija, String vrijednosti , String novaVrijednost ) {
         if(!pomocnaTransformacija(opcija))
             return;
                     
-        sql = " UPDATE matrica SET ? = ? WHERE vrijednosti = ?";
+        sql = " UPDATE matrice SET ? = ? WHERE vrijednosti = ?";
 
-        try {
+        try (Connection conn = DriverManager.getConnection(url) ) {
             PreparedStatement pstmt = conn.prepareStatement ( sql );
             pstmt.setString (1 , stupac ) ;
             pstmt.setString (2 , novaVrijednost ) ;
@@ -152,14 +156,14 @@ public class SQLite {
         }
     }
     
-    public static void selectSvojstvo ( Connection conn, String vrijednosti, int opcija ) {
+    public static void selectSvojstvo ( String vrijednosti, int opcija ) {
         
         if(!pomocnaSvojstvo(opcija))
             return;
         
-        sql = " SELECT ? FROM matrica WHERE vrijednosti = ? ";
+        sql = " SELECT ? FROM matrice WHERE vrijednosti = ? ";
 
-        try {
+        try (Connection conn = DriverManager.getConnection(url) ) {
             PreparedStatement pstmt = conn.prepareStatement ( sql );
             pstmt.setString (1 , stupac ) ;
             pstmt.setString (2 , vrijednosti ) ;
@@ -173,14 +177,14 @@ public class SQLite {
         }   
     }
     
-    public static void selectTransformacija ( Connection conn, String vrijednosti, int opcija ) {
+    public static void selectTransformacija ( String vrijednosti, int opcija ) {
         
         if(!pomocnaTransformacija(opcija))
             return;
         
-        sql = " SELECT ? FROM matrica WHERE vrijednosti = ? ";
+        sql = " SELECT ? FROM matrice WHERE vrijednosti = ? ";
 
-        try {
+        try (Connection conn = DriverManager.getConnection(url) ) {
             PreparedStatement pstmt = conn.prepareStatement ( sql );
             pstmt.setString (1 , stupac ) ;
             pstmt.setString (2 , vrijednosti ) ;

@@ -562,15 +562,9 @@ public class GrafickoSucelje extends javax.swing.JFrame {
         raspakirajMatricu(datoteka, 0);                  
         if (matricaPravilnoUnesena) {
             jTextArea1.setText(matricaTab1.toString());
-
-            try ( Connection conn = DriverManager.getConnection ( url ) ) {
-                if ( conn != null ) {
-                    SQLite.dodajNovuMatricu(matricaTab1.toString(), conn);
-                    System.out.println("matrica dodana u bazu.");
-                }
-            } catch ( SQLException e ) {
-                System.out.println ( e.getMessage () ) ;
-            } 
+           
+            SQLite.dodajNovuMatricu(matricaTab1.toString());
+            System.out.println("matrica dodana u bazu.");          
         }
             //jTextArea1.setText(upisMatriceUTextArea(unesenaMatrica));
         else
@@ -589,6 +583,9 @@ public class GrafickoSucelje extends javax.swing.JFrame {
         if (matricaPravilnoUnesena) {
             jTextArea1.setText(matricaTab1.toString());
             jTextFieldUnosMatrice.setText("");
+            
+            SQLite.dodajNovuMatricu(matricaTab1.toString());
+            System.out.println("matrica dodana u bazu.");      
         }
         else
             JOptionPane.showMessageDialog(this, "Nepravilno unesena matrica!", "Greška", JOptionPane.ERROR_MESSAGE);
@@ -684,23 +681,36 @@ public class GrafickoSucelje extends javax.swing.JFrame {
             KvadratnaMatrica km = new KvadratnaMatrica(matricaTab1.matrica);
             
             if(odabrano == "Simetričnost") {
-                if (km.jeLiSimetricna()) 
-                    rez = "Matrica je simetrična.";
                 
-                else rez = "Matrica nije simetrična.";
+                if (km.jeLiSimetricna())  {
+                    rez = "Matrica je simetrična.";
+                    SQLite.azurirajSvojstvoMatrice(2, matricaTab1.toString(), 1);
+
+                }
+                
+                else {
+                    rez = "Matrica nije simetrična.";
+                    SQLite.azurirajSvojstvoMatrice(2, matricaTab1.toString(), 0);
+                }
             }
             // poztivna definitnost
             else {
-                if (km.jeLiPozitivnoDefinitna()) rez = "Matrica je pozitivno definitna.";
-                else rez = "Matrica nije pozitivno definitna.";
-            }
-            
+                if (km.jeLiPozitivnoDefinitna())  {
+                    rez = "Matrica je pozitivno definitna.";
+                    SQLite.azurirajSvojstvoMatrice(3, matricaTab1.toString(), 1);
+                }
+                else {
+                    rez = "Matrica nije pozitivno definitna.";
+                    SQLite.azurirajSvojstvoMatrice(3, matricaTab1.toString(), 0);
+                }
+            }           
         }
         
         //rang
         else {
-            rez = "Rang matrice je " + String.valueOf(matricaTab1.rang()) + ".";
-            
+            int rang = matricaTab1.rang();
+            rez = "Rang matrice je " + String.valueOf(rang) + ".";
+            SQLite.azurirajSvojstvoMatrice(1, matricaTab1.toString(), rang);           
         }
         jTextFieldSvojstva.setText(rez);
 
