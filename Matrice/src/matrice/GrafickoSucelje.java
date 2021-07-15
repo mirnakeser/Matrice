@@ -13,11 +13,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Connection;
-import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.regex.Pattern;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -767,6 +767,9 @@ public class GrafickoSucelje extends javax.swing.JFrame {
 
         String rez = "";
         
+        ImageIcon icon = new ImageIcon("wa.png");
+        ImageIcon o = new ImageIcon();
+        
         if (odabrano == "Swap") {
             String unosKorisnika = JOptionPane.showInputDialog(this, "Odaberite retke i stupac za swap:", "1,2,1");
             unosKorisnika.strip();
@@ -795,6 +798,7 @@ public class GrafickoSucelje extends javax.swing.JFrame {
             Matrica matswap  = new Matrica (matricaTab1.matrica);
             matswap.swap(vrijednostiInt[0]-1, vrijednostiInt[1]-1, vrijednostiInt[2]-1);
             SQLite.azurirajTransformacijuMatrice(3, matricaTab1.toString(), matswap.toString());
+            JOptionPane.showMessageDialog(this, matswap.toString(), "Primjena transformacije swap", JOptionPane.INFORMATION_MESSAGE, icon);
         }
         else {
             if (matricaTab1.brRedaka != matricaTab1.brStupaca) {
