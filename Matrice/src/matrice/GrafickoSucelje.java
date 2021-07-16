@@ -867,7 +867,9 @@ public class GrafickoSucelje extends javax.swing.JFrame {
             timeElapsed = finish - start;
             
             SQLite.azurirajTransformacijuMatrice(3, matricaTab1.toString(), matswap.toString());
-            JOptionPane.showMessageDialog(this, matswap.toString(), "Primjena transformacije swap", JOptionPane.INFORMATION_MESSAGE, icon);
+            JOptionPane.showMessageDialog(this, 
+                    matswap.toString()+ "\n\n" + String.valueOf(timeElapsed) + "ms",
+                    "Primjena transformacije swap", JOptionPane.INFORMATION_MESSAGE, icon);
         }
         else {
             if (matricaTab1.brRedaka != matricaTab1.brStupaca) {
@@ -882,7 +884,9 @@ public class GrafickoSucelje extends javax.swing.JFrame {
                 finish = System.nanoTime();
                 timeElapsed = finish - start;
                 SQLite.azurirajTransformacijuMatrice(1, matricaTab1.toString(), km.toString());
-                JOptionPane.showMessageDialog(this, km.toString(), "Primjena transponiranja", JOptionPane.INFORMATION_MESSAGE, icon);
+                JOptionPane.showMessageDialog(this, 
+                        km.toString()+ "\n\n" + String.valueOf(timeElapsed) + "ms",
+                        "Primjena transponiranja", JOptionPane.INFORMATION_MESSAGE, icon);
 
 
             }
@@ -894,7 +898,9 @@ public class GrafickoSucelje extends javax.swing.JFrame {
                     timeElapsed = finish - start;
                        
                     SQLite.azurirajTransformacijuMatrice(2, matricaTab1.toString(), km.toString());
-                    JOptionPane.showMessageDialog(this, km.toString(), "Faktorizacija Choleskog", JOptionPane.INFORMATION_MESSAGE, icon);
+                    JOptionPane.showMessageDialog(this, 
+                            km.toString() + "\n\n" + String.valueOf(timeElapsed) + "ms", "Faktorizacija Choleskog",
+                            JOptionPane.INFORMATION_MESSAGE, icon);
 
 
                 } catch(Exception e) {
@@ -910,7 +916,9 @@ public class GrafickoSucelje extends javax.swing.JFrame {
                     finish = System.nanoTime();
                     timeElapsed = finish - start;
                     
-                    JOptionPane.showMessageDialog(this, km.toString(), "Inverz matrice", JOptionPane.INFORMATION_MESSAGE, icon);
+                    JOptionPane.showMessageDialog(this,
+                            km.toString() + "\n\n" + String.valueOf(timeElapsed) + "ms", 
+                            "Inverz matrice", JOptionPane.INFORMATION_MESSAGE, icon);
 
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(this, e.getMessage(), "Upozorenje", JOptionPane.WARNING_MESSAGE);            
@@ -926,7 +934,8 @@ public class GrafickoSucelje extends javax.swing.JFrame {
                 timeElapsed = finish - start;
                 
                 String ispis = "matrica L :\n" + L.toString() + "\n matrica U: \n" + U.toString();
-                JOptionPane.showMessageDialog(this, ispis, "Primjena transponiranja", JOptionPane.INFORMATION_MESSAGE, icon);
+                JOptionPane.showMessageDialog(this, ispis+ "\n\n" + String.valueOf(timeElapsed) + "ms", 
+                        "Primjena transponiranja", JOptionPane.INFORMATION_MESSAGE, icon);
 
 
             }
@@ -934,7 +943,7 @@ public class GrafickoSucelje extends javax.swing.JFrame {
         }
         
         //jTextFieldSvojstva.setText(rez);
-        jLabel1.setText(String.valueOf(timeElapsed) + " ns");
+        //jLabel1.setText(String.valueOf(timeElapsed) + " ns");
     }//GEN-LAST:event_jButton5ActionPerformed
     //button za operaciju na matricama 1 i 2, ispisuje se rezultat u text area
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
