@@ -120,7 +120,8 @@ public class MatricaTest {
         
        Matrica result = instance.plus(M);
        
-       assertEquals(expResult.matrica, result.matrica);
+       for(int i = 0; i < expResult.size().get(0); ++i)
+            assertArrayEquals(expResult.matrica[i], result.matrica[i], 1e-9);
         // TODO review the generated test code and remove the default call to fail.
       }
 
@@ -170,7 +171,8 @@ public class MatricaTest {
        
        Matrica result = instance.minus(M);
         
-       assertEquals(expResult.matrica, result.matrica);
+       for(int i = 0; i < expResult.size().get(0); ++i)
+            assertArrayEquals(expResult.matrica[i], result.matrica[i], 1e-9);
         // TODO review the generated test code and remove the default call to fail.
         
     }
@@ -192,7 +194,8 @@ public class MatricaTest {
         Matrica expResult = new Matrica(rez);
         Matrica result = instance.puta(M);
         
-        assertEquals(expResult.matrica, result.matrica);
+        for(int i = 0; i < expResult.size().get(0); ++i)
+            assertArrayEquals(expResult.matrica[i], result.matrica[i], 1e-9);
         // TODO review the generated test code and remove the default call to fail.
         
     }

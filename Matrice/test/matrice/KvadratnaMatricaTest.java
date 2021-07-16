@@ -55,7 +55,8 @@ public class KvadratnaMatricaTest {
         
         
       instance.transponiraj();
-      assertEquals(expResult.matrica, instance.matrica);
+      for(int i = 0; i < expResult.size().get(0); ++i)
+            assertArrayEquals(expResult.matrica[i], instance.matrica[i], 1e-9);
         
        
        // TODO review the generated test code and remove the default call to fail.
@@ -173,8 +174,8 @@ public class KvadratnaMatricaTest {
         KvadratnaMatrica instance = new KvadratnaMatrica(A);
         double[] expResult = new double[2];
         
-        expResult[0]=0;
-        expResult[1]=2;
+        expResult[0]=2;
+        expResult[1]=0;
         
         double[] result = instance.svojstveneVrijednosti();
         
@@ -196,6 +197,6 @@ public class KvadratnaMatricaTest {
        double[][] result=instance.svojstveniVektori();     
         
           for(int i=0;i<expResult.length;i++)
-                 assertArrayEquals(expResult[i], result[i], 1e-9);
+                 assertArrayEquals(expResult[i], result[i], 1e-5);
  }
 }
