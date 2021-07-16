@@ -5,12 +5,14 @@
  */
 package matrice;
 
+import java.util.ArrayList;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.rosuda.JRI.Rengine;
 
 /**
  *
@@ -196,4 +198,93 @@ public class MatricaTest {
         // TODO review the generated test code and remove the default call to fail.
         
     }
+
+    /**
+     * Test of toString method, of class Matrica.
+     */
+    @Test
+    public void testToString() {
+        System.out.println("toString");
+        Matrica instance = new Matrica();
+        String expResult = "";
+        String result = instance.toString();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of swap method, of class Matrica.
+     */
+    @Test
+    public void testSwap() {
+        System.out.println("swap");
+        int redak1 = 0;
+        int redak2 = 0;
+        int stupac = 0;
+        Matrica instance = new Matrica();
+        instance.swap(redak1, redak2, stupac);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of size method, of class Matrica.
+     */
+    @Test
+    public void testSize() {
+        System.out.println("size");
+        Matrica instance = new Matrica();
+        ArrayList<Integer> expResult = null;
+        ArrayList<Integer> result = instance.size();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of stvoriEngine method, of class Matrica.
+     */
+    @Test
+    public void testStvoriEngine() {
+        System.out.println("stvoriEngine");
+        Rengine expResult = null;
+        Rengine result = Matrica.stvoriEngine();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of stvoriRMatricu method, of class Matrica.
+     */
+    @Test
+    public void testStvoriRMatricu() {
+        System.out.println("stvoriRMatricu");
+        Matrica instance = new Matrica();
+        String expResult = "";
+        String result = instance.stvoriRMatricu();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of main method, of class Matrica.
+     */
+    @Test
+    public void testMain() {
+        System.out.println("main");
+        String[] args = null;
+        Matrica.main(args);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+   
+    }
+        
+        
+   
+        
 }

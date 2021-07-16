@@ -198,4 +198,36 @@ public class KvadratnaMatricaTest {
           for(int i=0;i<expResult.length;i++)
                  assertArrayEquals(expResult[i], result[i], 1e-9);
  }
+
+    /**
+     * Test of trag method, of class KvadratnaMatrica.
+     */
+    @Test
+    public void testTrag() {
+        System.out.println("trag");
+        double[][] A={{1,2,3},{1,2,3},{1,2,3}};
+        KvadratnaMatrica instance = new KvadratnaMatrica(A);
+        int expResult = 6;
+       
+        
+        int result = instance.trag();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of jeLiRegularna method, of class KvadratnaMatrica.
+     */
+    @Test
+    public void testJeLiRegularna() {
+        System.out.println("jeLiRegularna");
+        KvadratnaMatrica instance = new KvadratnaMatrica();
+        boolean expResult = false;
+        boolean result = instance.jeLiRegularna();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+  
 }
