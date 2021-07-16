@@ -49,20 +49,9 @@ public class MatricaTest {
    @Test
    public void testRang() { /*provjera ranga*/
        System.out.println("rang");
-        double [][] A=new double[4][3];
+        double [][] A={{3,4,5},{7,7,0},{5,6,1},{9,1000,1}};
         
-       A[0][0]=3;
-       A[0][1]=4;
-       A[0][2]=5;
-       A[1][0]=7;
-       A[1][1]=7;
-       A[1][2]=0;
-       A[2][0]=5;
-       A[2][1]=6;
-       A[2][2]=1;
-       A[3][0]=9;
-       A[3][1]=1000;
-       A[3][2]=1;
+      
        
         
         
@@ -83,34 +72,10 @@ public class MatricaTest {
     @Test
     public void testPlus() throws Exception {
         System.out.println("plus");
-        double [][] A=new double[4][3];
-       A[0][0]=3;
-       A[0][1]=4;
-       A[0][2]=5;
-       A[1][0]=7;
-       A[1][1]=7;
-       A[1][2]=0;
-       A[2][0]=5;
-       A[2][1]=6;
-       A[2][2]=1;
-       A[3][0]=9;
-       A[3][1]=1000;
-       A[3][2]=1;
-       Matrica M=new Matrica(A);
+        double [][] A={{3,4,5},{7,7,0},{5,6,1},{9,1000,1}};
+        Matrica M=new Matrica(A);
        
-       double [][] B=new double[4][3];
-       B[0][0]=7;
-       B[0][1]=9;
-       B[0][2]=11;
-       B[1][0]=8;
-       B[1][1]=7;
-       B[1][2]=0;
-       B[2][0]=5;
-       B[2][1]=6;
-       B[2][2]=1000;
-       B[3][0]=90000;
-       B[3][1]=1;
-       B[3][2]=77;
+       double [][] B={{7,9,11},{8,7,0},{5,6,1000},{90000,1,77}};
        Matrica instance = new Matrica(B);
        
        
