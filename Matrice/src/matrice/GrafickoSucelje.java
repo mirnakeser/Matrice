@@ -932,8 +932,12 @@ public class GrafickoSucelje extends javax.swing.JFrame {
                 rez = matrica1Tab2.puta(matrica2Tab2);
                 long finish = System.currentTimeMillis();
                 long result = finish - start;
-                jTextArea2.setText(matrica1Tab2.toString() + "\n*\n" + matrica2Tab2.toString() + "\n=\n" + rez.toString());
+                String tekst = matrica1Tab2.toString() + "\n*\n" + matrica2Tab2.toString() + "\n=\n" + rez.toString();
+                jTextArea2.setText(tekst);
                 SQLite.dodajMnozenje(rez.brRedaka*rez.brStupaca, (int)result);
+                PDF.spremiPDF(matrica1Tab2.toString().replace("\n", ""), 
+                        matrica2Tab2.toString().replace("\n", ""), 
+                        rez.toString().replace("\n", ""), "Umnozak");
             }catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Matrice nisu odgovarajućih dimenzija!", "Upozorenje", JOptionPane.WARNING_MESSAGE);            
 
@@ -950,6 +954,9 @@ public class GrafickoSucelje extends javax.swing.JFrame {
                     long result = finish - start;
                     SQLite.dodajZbrajanje(rez.brRedaka*rez.brStupaca, (int)result);
                     jTextArea2.setText(matrica1Tab2.toString() + "\n+\n" + matrica2Tab2.toString() + "\n=\n" + rez.toString());
+                    PDF.spremiPDF(matrica1Tab2.toString().replace("\n", ""), 
+                        matrica2Tab2.toString().replace("\n", ""), 
+                        rez.toString().replace("\n", ""), "Zbroj");
                 }
                 catch(Exception e) {
                     JOptionPane.showMessageDialog(this, "Matrice moraju biti istih dimenzija!", "Upozorenje", JOptionPane.WARNING_MESSAGE);            
@@ -966,6 +973,9 @@ public class GrafickoSucelje extends javax.swing.JFrame {
                     SQLite.dodajOduzimanje(rez.brRedaka*rez.brStupaca, (int)result);
 
                     jTextArea2.setText(matrica1Tab2.toString() + "\n-\n" + matrica2Tab2.toString() + "\n=\n" + rez.toString());
+                    PDF.spremiPDF(matrica1Tab2.toString().replace("\n", ""), 
+                        matrica2Tab2.toString().replace("\n", ""), 
+                        rez.toString().replace("\n", ""), "Kvocijent");
                 }
                 catch(Exception e) {
                     JOptionPane.showMessageDialog(this, "Matrice moraju biti istih dimenzija!", "Upozorenje", JOptionPane.WARNING_MESSAGE);            
