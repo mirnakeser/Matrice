@@ -90,7 +90,7 @@ public class KvadratnaMatricaTest {
      * Test of faktorizacijaCholeskog method, of class KvadratnaMatrica.
      */
   @Test
-    public void testFaktorizacijaCholeskog() {
+    public void testFaktorizacijaCholeskog() {/*
         System.out.println("faktorizacijaCholeskog");
         KvadratnaMatrica instance = new KvadratnaMatrica();
         KvadratnaMatrica expResult = null;
@@ -98,7 +98,7 @@ public class KvadratnaMatricaTest {
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
-    }
+    */}
 
     /**
      * Test of jeLiPozitivnoDefinitna method, of class KvadratnaMatrica.
@@ -125,21 +125,15 @@ public class KvadratnaMatricaTest {
    @Test
     public void testInverz() {
         System.out.println("inverz");
-        double [][] A=new double[2][2];
-        for(int i=0;i<2;i++)
-            for(int j=0;j<2;j++)
-                 A[i][j]=1;
-        A[1][1]=0;
+        double[][] A = {{1,2},{3,4}};
         KvadratnaMatrica instance = new KvadratnaMatrica(A);
-        
-        A[0][0]=2;
-        A[0][1]=-1;
-        A[1][0]=-1;
-        A[1][1]=1;
-       // KvadratnaMatrica expResult = new KvadratnaMatrica(A);
-        
-       // KvadratnaMatrica result = instance.inverz();
-        //assertEquals(expResult, result);
+        double[][] rez = {{-2,1},{1.5,-0.5}};
+        KvadratnaMatrica expResult = new KvadratnaMatrica(rez);
+
+       KvadratnaMatrica result = instance.inverz();
+        for(int i = 0; i < expResult.size().get(0); ++i)
+            assertArrayEquals(expResult.matrica[i], result.matrica[i], 1e-9);
+       
         // TODO review the generated test code and remove the default call to fail.
         
     }
@@ -157,8 +151,8 @@ public class KvadratnaMatricaTest {
               expResult[i]=instance.matrica[i][i];
         
         
-       // double[] result = instance.dijagonala();
-       // assertArrayEquals(expResult, result);
+       double[] result = instance.dijagonala();
+       assertArrayEquals(expResult, result, 1e-9);
         // TODO review the generated test code and remove the default call to fail.
         
     }
@@ -173,21 +167,23 @@ public class KvadratnaMatricaTest {
         for(int i=0;i<2;i++)
             for(int j=0;j<2;j++)
                  A[i][j]=1;
+        
         KvadratnaMatrica instance = new KvadratnaMatrica(A);
         double[] expResult = new double[2];
         
-        expResult[0]=0;
-        expResult[1]=2;
+        expResult[0]=2;
+        expResult[1]=0;
         
-        //double[] result = instance.svojstveneVrijednosti();
-       // assertArrayEquals(expResult, result);
+        double[] result = instance.svojstveneVrijednosti();
+        
+        assertArrayEquals(expResult, result, 1e-9);
         // TODO review the generated test code and remove the default call to fail.
       }
     /**
      * Test of svojstveniVektori method, of class KvadratnaMatrica.
      */
-    @Test
-    public void testSvojstveniVektori() {/*
+    /*@Test
+    public void testSvojstveniVektori() {
         System.out.println("svojstveniVektori");
         
         double [][] A=new double[2][2];
@@ -209,7 +205,7 @@ public class KvadratnaMatricaTest {
         double[][] result = instance.svojstveniVektori();
         assertArrayEquals(expResult, result);*/
         // TODO review the generated test code and remove the default call to fail.
-      }
+      //}
 
     
     
