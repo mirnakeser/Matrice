@@ -12,6 +12,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import org.jfree.data.jdbc.JDBCCategoryDataset;
+import org.jfree.data.xy.XYDataset;
 import org.junit.runner.Result;
 
 
@@ -262,27 +264,19 @@ public class SQLite {
     }
     
     public static int[][] selectMnozenje() {
-        int[][] rez = new int[2][0];
-        
-        sql = " SELECT brElemenata, vrijeme FROM mnozenje ";
+        int[][] rez = null;
+        JDBCCategoryDataset dataset = null;
+        sql = " SELECT * FROM mnozenje ";
 
         try (Connection conn = DriverManager.getConnection(url) ) {
-            PreparedStatement pstmt = conn.prepareStatement ( sql,ResultSet.TYPE_SCROLL_SENSITIVE, 
-                        ResultSet.CONCUR_UPDATABLE );
- 
-
-            //pstmt.executeUpdate () ;
-            ResultSet rs = pstmt.executeQuery ( sql );
-            rs.last();
-            int size = rs.getRow();
-            rs.beforeFirst();
+            dataset = new JDBCCategoryDataset(conn, sql);
+            int size = dataset.getColumnCount();
             rez = new int[2][size];
-            int i = 0;
-            while ( rs.next () ) {
-                rez[0][i] = rs.getInt("brElemenata");
-                rez[1][i] = rs.getInt("vremena");
-                i++;
-        }
+            
+            for(int i = 0; i < size; ++i){
+                rez[0][i] = (int)dataset.getValue(0, i);
+                rez[1][i] = (int)dataset.getValue(1, i);
+            }
         } catch ( SQLException e ) {
             System.out.println ( e.getMessage () ) ;
         }
@@ -290,24 +284,20 @@ public class SQLite {
     }
     
     public static int[][] selectZbrajanje() {
-        int[][] rez = new int[2][0];
+        int[][] rez = null;
+        JDBCCategoryDataset dataset = null;
         
-        sql = " SELECT brElemenata, vrijeme FROM zbrajanje ";
+        sql = " SELECT * FROM zbrajanje ";
 
         try (Connection conn = DriverManager.getConnection(url) ) {
-        PreparedStatement pstmt = conn.prepareStatement ( sql,ResultSet.TYPE_SCROLL_SENSITIVE, 
-                        ResultSet.CONCUR_UPDATABLE );            //pstmt.executeUpdate () ;
-            ResultSet rs = pstmt.executeQuery ( sql );
-            rs.last();
-            int size = rs.getRow();
-            rs.beforeFirst();
+            dataset = new JDBCCategoryDataset(conn, sql);
+            int size = dataset.getColumnCount();
             rez = new int[2][size];
-            int i = 0;
-            while ( rs.next () ) {
-                rez[0][i] = rs.getInt("brElemenata");
-                rez[1][i] = rs.getInt("vremena");
-                i++;
-        }
+            
+            for(int i = 0; i < size; ++i){
+                rez[0][i] = (int)dataset.getValue(0, i);
+                rez[1][i] = (int)dataset.getValue(1, i);
+            }
         } catch ( SQLException e ) {
             System.out.println ( e.getMessage () ) ;
         }
@@ -315,24 +305,20 @@ public class SQLite {
     }
     
     public static int[][] selectOduzimanje() {
-        int[][] rez = new int[2][0];
+        int[][] rez = null;
+        JDBCCategoryDataset dataset = null;
         
-        sql = "SELECT brElemenata, vrijeme FROM mnozenje";
+        sql = "SELECT * FROM oduzimanje";
 
         try (Connection conn = DriverManager.getConnection(url) ) {
-            Statement stmt = conn.createStatement (ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            ResultSet rs = stmt.executeQuery (sql);
-            
-            rs.last();
-            int size = rs.getRow();
-            rs.beforeFirst();
+            dataset = new JDBCCategoryDataset(conn, sql);
+            int size = dataset.getColumnCount();
             rez = new int[2][size];
-            int i = 0;
-            while ( rs.next() ) {
-                rez[0][i] = rs.getInt("brElemenata");
-                rez[1][i] = rs.getInt("vremena");
-                i++;
-        }
+            
+            for(int i = 0; i < size; ++i){
+                rez[0][i] = (int)dataset.getValue(0, i);
+                rez[1][i] = (int)dataset.getValue(1, i);
+            }
         } catch ( SQLException e ) {
             System.out.println ( e.getMessage () ) ;
         }
