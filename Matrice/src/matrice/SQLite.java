@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import org.junit.runner.Result;
 
 
 
@@ -263,10 +264,13 @@ public class SQLite {
     public static int[][] selectMnozenje() {
         int[][] rez = new int[2][0];
         
-        sql = " SELECT brElemenata FROM mnozenje ";
+        sql = " SELECT brElemenata, vrijeme FROM mnozenje ";
 
         try (Connection conn = DriverManager.getConnection(url) ) {
-            PreparedStatement pstmt = conn.prepareStatement ( sql );
+            PreparedStatement pstmt = conn.prepareStatement ( sql,ResultSet.TYPE_SCROLL_SENSITIVE, 
+                        ResultSet.CONCUR_UPDATABLE );
+ 
+
             //pstmt.executeUpdate () ;
             ResultSet rs = pstmt.executeQuery ( sql );
             rs.last();
@@ -288,11 +292,11 @@ public class SQLite {
     public static int[][] selectZbrajanje() {
         int[][] rez = new int[2][0];
         
-        sql = " SELECT brElemenata FROM zbrajanje ";
+        sql = " SELECT brElemenata, vrijeme FROM zbrajanje ";
 
         try (Connection conn = DriverManager.getConnection(url) ) {
-            PreparedStatement pstmt = conn.prepareStatement ( sql );
-            //pstmt.executeUpdate () ;
+        PreparedStatement pstmt = conn.prepareStatement ( sql,ResultSet.TYPE_SCROLL_SENSITIVE, 
+                        ResultSet.CONCUR_UPDATABLE );            //pstmt.executeUpdate () ;
             ResultSet rs = pstmt.executeQuery ( sql );
             rs.last();
             int size = rs.getRow();
@@ -313,18 +317,18 @@ public class SQLite {
     public static int[][] selectOduzimanje() {
         int[][] rez = new int[2][0];
         
-        sql = " SELECT brElemenata FROM mnozenje ";
+        sql = "SELECT brElemenata, vrijeme FROM mnozenje";
 
         try (Connection conn = DriverManager.getConnection(url) ) {
-            PreparedStatement pstmt = conn.prepareStatement ( sql );
-            //pstmt.executeUpdate () ;
-            ResultSet rs = pstmt.executeQuery ( sql );
+            Statement stmt = conn.createStatement (ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            ResultSet rs = stmt.executeQuery (sql);
+            
             rs.last();
             int size = rs.getRow();
             rs.beforeFirst();
             rez = new int[2][size];
             int i = 0;
-            while ( rs.next () ) {
+            while ( rs.next() ) {
                 rez[0][i] = rs.getInt("brElemenata");
                 rez[1][i] = rs.getInt("vremena");
                 i++;

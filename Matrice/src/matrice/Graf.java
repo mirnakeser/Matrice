@@ -39,7 +39,7 @@ public class Graf implements Runnable{
     
     @Override
     public void run(){
-        JFrame frame = new JFrame( "Euler pseudoprimes" );
+        JFrame frame = new JFrame( "Matrice" );
         frame.setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
         //------------------------------------------------------------
         ArrayList<ArrayList<Long>> vremena = new ArrayList<>();
