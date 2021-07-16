@@ -181,43 +181,18 @@ public class MatricaTest {
    @Test
     public void testPuta() throws Exception {
         System.out.println("puta");
-      double [][] A=new double[3][3];
       
-      double [][] B=new double[3][3];
-       
-       for(int i=0;i<3;i++)
-           for(int j=0;j<3;j++)
-           {
-            B[i][j]=0;
-           
-           }
-       Matrica M=new Matrica(B);
+        double[][] A = {{1,2,3},{4,5,6},{7,8,9}};
+        double[][] B = {{9,8,7},{6,5,4},{3,2,1}};
         
-       A[0][0]=1;
-       A[0][1]=1;
-       A[0][2]=1;
-       A[1][0]=1;
-       A[1][1]=1;
-       A[1][2]=1;
-       A[2][0]=1;
-       A[2][1]=1;
-       A[2][2]=1;
-       Matrica instance = new Matrica(A);
-       
-        
+        Matrica M = new Matrica(B);
+        Matrica instance = new Matrica(A);
       
-        
-        Matrica expResult=instance ;
+        double[][] rez = {{30, 24, 18}, {84, 69, 54}, {138, 114, 90}};
+        Matrica expResult = new Matrica(rez);
         Matrica result = instance.puta(M);
         
-         for(int i=0;i<3;i++)
-           for(int j=0;j<3;j++)
-           {
-            System.out.println(result.matrica[i][j]);
-           }
-        
-        
-        //assertEquals(expResult.matrica, result.matrica);
+        assertEquals(expResult.matrica, result.matrica);
         // TODO review the generated test code and remove the default call to fail.
         
     }
