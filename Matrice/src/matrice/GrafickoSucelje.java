@@ -829,6 +829,9 @@ public class GrafickoSucelje extends javax.swing.JFrame {
         jComboBox2.setSelectedIndex(0);
 
         String rez = "";
+        long start = 0;
+        long finish = 0;
+        long timeElapsed = 0;
         
         ImageIcon icon = new ImageIcon("wa.png");
         
@@ -858,7 +861,11 @@ public class GrafickoSucelje extends javax.swing.JFrame {
                 }
             }
             Matrica matswap  = new Matrica (matricaTab1.matrica);
+            start = System.nanoTime();
             matswap.swap(vrijednostiInt[0]-1, vrijednostiInt[1]-1, vrijednostiInt[2]-1);
+            finish = System.nanoTime();
+            timeElapsed = finish - start;
+            
             SQLite.azurirajTransformacijuMatrice(3, matricaTab1.toString(), matswap.toString());
             JOptionPane.showMessageDialog(this, matswap.toString(), "Primjena transformacije swap", JOptionPane.INFORMATION_MESSAGE, icon);
         }
@@ -870,7 +877,10 @@ public class GrafickoSucelje extends javax.swing.JFrame {
             
             KvadratnaMatrica km = new KvadratnaMatrica(matricaTab1.matrica);
             if(odabrano == "Transponiranje") {
+                start = System.nanoTime();
                 km.transponiraj();
+                finish = System.nanoTime();
+                timeElapsed = finish - start;
                 SQLite.azurirajTransformacijuMatrice(1, matricaTab1.toString(), km.toString());
                 JOptionPane.showMessageDialog(this, km.toString(), "Primjena transponiranja", JOptionPane.INFORMATION_MESSAGE, icon);
 
@@ -878,7 +888,11 @@ public class GrafickoSucelje extends javax.swing.JFrame {
             }
             else if (odabrano == "Faktorizacija Choleskog"){
                 try {
-                    km.faktorizacijaCholeskog();    
+                    start = System.nanoTime();
+                    km.faktorizacijaCholeskog(); 
+                    finish = System.nanoTime();
+                    timeElapsed = finish - start;
+                       
                     SQLite.azurirajTransformacijuMatrice(2, matricaTab1.toString(), km.toString());
                     JOptionPane.showMessageDialog(this, km.toString(), "Faktorizacija Choleskog", JOptionPane.INFORMATION_MESSAGE, icon);
 
@@ -891,7 +905,11 @@ public class GrafickoSucelje extends javax.swing.JFrame {
             }
             else if (odabrano == "Invertiranje") {
                 try {
+                    start = System.nanoTime();
                     KvadratnaMatrica inverz = km.inverz();
+                    finish = System.nanoTime();
+                    timeElapsed = finish - start;
+                    
                     JOptionPane.showMessageDialog(this, km.toString(), "Inverz matrice", JOptionPane.INFORMATION_MESSAGE, icon);
 
                 } catch (Exception e) {
@@ -901,17 +919,22 @@ public class GrafickoSucelje extends javax.swing.JFrame {
             }
             
             else if (odabrano == "LU faktorizacija") {
+                start = System.nanoTime();
                 KvadratnaMatrica L = matricaTab1.LU.dohvatiL();
                 KvadratnaMatrica U = matricaTab1.LU.dohvatiU();
+                finish = System.nanoTime();
+                timeElapsed = finish - start;
+                
                 String ispis = "matrica L :\n" + L.toString() + "\n matrica U: \n" + U.toString();
                 JOptionPane.showMessageDialog(this, ispis, "Primjena transponiranja", JOptionPane.INFORMATION_MESSAGE, icon);
 
 
             }
+            
         }
         
         //jTextFieldSvojstva.setText(rez);
-        
+        jLabel1.setText(String.valueOf(timeElapsed) + " ns");
     }//GEN-LAST:event_jButton5ActionPerformed
     //button za operaciju na matricama 1 i 2, ispisuje se rezultat u text area
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

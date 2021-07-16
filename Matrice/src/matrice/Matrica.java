@@ -288,9 +288,9 @@ public class Matrica implements Sucelje{
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        double[][] m = {{1,2},{2,1}};
+        double[][] m = {{1,2},{1,2}};
         KvadratnaMatrica M = new KvadratnaMatrica(m);
-        System.out.println(M.LU.dohvatiU().toString());
+        System.out.println(M.trag());
     }
     
 }
