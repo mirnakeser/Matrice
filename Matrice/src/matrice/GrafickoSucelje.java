@@ -118,7 +118,7 @@ public class GrafickoSucelje extends javax.swing.JFrame {
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Simetričnost", "Rang", "Pozitivna definitnost", "Dijagonala", "Trag", "Regularnost", "Svojstvene vrijednosti" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Simetričnost", "Rang", "Pozitivna definitnost", "Dijagonala", "Trag", "Regularnost", "Svojstvene vrijednosti", "Svojstveni vektori" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -769,7 +769,26 @@ public class GrafickoSucelje extends javax.swing.JFrame {
                 rez += String.valueOf(sv[sv.length-1]);
                 rez += ".";
             }
-            
+            else if(odabrano == "Svojstveni vektori") {
+                start = System.nanoTime();
+                double[][] sv = km.svojstveniVektori();
+                finish = System.nanoTime();
+                timeElapsed = finish - start;
+                String rezultat = "";
+                for(int i = 0; i < sv.length; i++) {
+                    rezultat += "[";
+                    for (int j = 0; j < sv[0].length-1; j++) {
+                        rezultat += String.valueOf(sv[i][j]);
+                        rezultat += ", ";
+                    }
+                    rezultat += String.valueOf(sv[i][sv[i].length-1]);
+                    rezultat += "]\n";
+                } 
+                ImageIcon icon = new ImageIcon("wa.png");
+
+                JOptionPane.showMessageDialog(this, rezultat, "Svojstveni vektori matrice", JOptionPane.INFORMATION_MESSAGE, icon);
+
+            }          
         }
         
         //rang
@@ -811,7 +830,7 @@ public class GrafickoSucelje extends javax.swing.JFrame {
 
         String rez = "";
         
-      ImageIcon icon = new ImageIcon("wa.png");
+        ImageIcon icon = new ImageIcon("wa.png");
         
         if (odabrano == "Swap") {
             String unosKorisnika = JOptionPane.showInputDialog(this, "Odaberite retke i stupac za swap:", "1,2,1");
@@ -897,6 +916,7 @@ public class GrafickoSucelje extends javax.swing.JFrame {
     //button za operaciju na matricama 1 i 2, ispisuje se rezultat u text area
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+
         if(!matrica1PravilnoUnesena) {
             JOptionPane.showMessageDialog(this, "Unesite matricu 1 u pravilnom formatu!", "Greška", JOptionPane.ERROR_MESSAGE);
             return;
@@ -924,7 +944,11 @@ public class GrafickoSucelje extends javax.swing.JFrame {
             
             if(jComboBox3.getSelectedItem().toString() == "Zbrajanje") {
                 try{
+                    long start = System.currentTimeMillis();
                     rez = matrica1Tab2.plus(matrica2Tab2);
+                    long finish = System.currentTimeMillis();
+                    long result = finish - start;
+                    SQLite.dodajZbrajanje(rez.brRedaka*rez.brStupaca, (int)result);
                     jTextArea2.setText(matrica1Tab2.toString() + "\n+\n" + matrica2Tab2.toString() + "\n=\n" + rez.toString());
                 }
                 catch(Exception e) {
@@ -935,22 +959,20 @@ public class GrafickoSucelje extends javax.swing.JFrame {
             // oduzimanje
             else {
                 try{
+                    long start = System.currentTimeMillis();
                     rez = matrica1Tab2.minus(matrica2Tab2);
+                    long finish = System.currentTimeMillis();
+                    long result = finish - start;
+                    SQLite.dodajOduzimanje(rez.brRedaka*rez.brStupaca, (int)result);
+
                     jTextArea2.setText(matrica1Tab2.toString() + "\n-\n" + matrica2Tab2.toString() + "\n=\n" + rez.toString());
                 }
                 catch(Exception e) {
                     JOptionPane.showMessageDialog(this, "Matrice moraju biti istih dimenzija!", "Upozorenje", JOptionPane.WARNING_MESSAGE);            
-
-
                 }
             }
         }
-        
-        
-        
-            
-        
-        
+        jComboBox3.setSelectedIndex(0);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
