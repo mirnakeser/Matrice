@@ -973,6 +973,10 @@ public class GrafickoSucelje extends javax.swing.JFrame {
             }
         }
         jComboBox3.setSelectedIndex(0);
+        System.out.println("mnozenje: " + SQLite.selectMnozenje());
+        Graf noviGraf = new Graf(SQLite.selectMnozenje(), SQLite.selectZbrajanje(), SQLite.selectOduzimanje());
+        noviGraf.run();
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
