@@ -214,7 +214,6 @@ public class KvadratnaMatricaTest {
         int result = instance.trag();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -223,12 +222,12 @@ public class KvadratnaMatricaTest {
     @Test
     public void testJeLiRegularna() {
         System.out.println("jeLiRegularna");
-        KvadratnaMatrica instance = new KvadratnaMatrica();
+        double[][] a = {{1,2,3},{4,5,6},{7,8,9}};
+        KvadratnaMatrica instance = new KvadratnaMatrica(a);
         boolean expResult = false;
         boolean result = instance.jeLiRegularna();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
   
 }
